@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "rootDir": "./",
+    "baseUrl": "./",
+    "outDir": "dist/types",
+    "target": "es5",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "sourceMap": false,
+    "downlevelIteration": true,
+    "noImplicitReturns": false,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@anxi/img-packer":[
+        "./packages/img-packer"
+      ]
+    }
+  },
+  "include": [
+    "./*",
+    "../packages/img-packer/*",
+    "../node_modules"
+  ]
+}

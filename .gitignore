@@ -1,0 +1,15 @@
+node_modules
+dist
+package-lock.json
+
+# 作者的思路记录
+mind.md
+
+# 原图、图片中间产物等资源
+re
+_*
+
+# 纹理可以从本地图片生成
+texture
+tex
+map.json

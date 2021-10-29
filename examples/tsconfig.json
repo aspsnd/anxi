@@ -1,0 +1,37 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "target": "es2017",
+    "module": "esnext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "rootDir": "../",
+    "strict": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "paths": {
+      "@anxi/core": [
+        "./packages/core"
+      ],
+      "@anxi/vdom": [
+        "./packages/vdom"
+      ],
+      "@anxi/view-matrix": [
+        "./packages/view-matrix"
+      ],
+      "@anxi/view-const":[
+        "./packages/view-const"
+      ],
+      "@anxi/*": [
+        "./packages/*"
+      ]
+    }
+  },
+  "include": [
+    "./**/*",
+    "../packages/**/*"
+  ]
+}

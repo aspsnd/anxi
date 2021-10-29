@@ -1,0 +1,32 @@
+{
+  "name": "@anxi/physics",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "anxyser <2546697613@qq.com>",
+  "homepage": "https://github.com/aspsnd/Anxi.ts#readme",
+  "license": "MIT",
+  "main": "index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aspsnd/Anxi.ts.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/aspsnd/Anxi.ts/issues"
+  },
+  "dependencies": {
+    "matter-js": "0.17.1"
+  }
+}

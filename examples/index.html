@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <script>
+    (() => {
+      var app;
+      var state = true;
+      window.__DEV__ = function __DEV__(_app) {
+        app = _app;
+      }
+      window.onkeydown = (e) => {
+        if (!e.ctrlKey || e.key !== '1') return;
+        if (state) {
+          app.stop();
+          state = false;
+        } else {
+          app.start();
+          state = true;
+        }
+      }
+    })()
+  </script>
+  <title>Examples for Anxi.ts</title>
+  <style>
+    html {
+      font-size: 3vmin;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    canvas {
+      width: 100vw;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

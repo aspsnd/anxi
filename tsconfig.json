@@ -1,0 +1,60 @@
+{
+  "compilerOptions": {
+    "rootDir": "./",
+    "baseUrl": "./",
+    "outDir": "dist/types",
+    "target": "es5",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "sourceMap": false,
+    "downlevelIteration": true,
+    "noImplicitReturns": false,
+    "noUnusedParameters": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@anxi/core": [
+        "./packages/core"
+      ],
+      "@anxi/vdom": [
+        "./packages/vdom"
+      ],
+      "@anxi/img-packer": [
+        "./packages/img-packer"
+      ],
+      "@anxi/view-const": [
+        "./packages/view-const"
+      ],
+      "@anxi/physics": [
+        "./packages/physics"
+      ],
+      "@anxi/*": [
+        "./packages/*"
+      ]
+    }
+  },
+  "include": [
+    "packages/global.d.ts",
+    "packages/*/global.d.ts",
+    "packages/**/*.ts",
+    "packages/*/index.ts"
+  ]
+}
