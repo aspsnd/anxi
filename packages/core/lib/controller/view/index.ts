@@ -14,8 +14,8 @@ export abstract class ViewController extends Controller {
     this.belonger!.on('getworld', () => this.changeView(true));
     this.belonger!.on('loseworld', () => this.changeView(false));
   }
-  onTime() {
-    this.onRender();
+  onTime(delta: number) {
+    this.onRender(delta);
   }
 
   changeView(add: boolean) {
@@ -27,7 +27,7 @@ export abstract class ViewController extends Controller {
     return this._destroyed;
   }
 
-  abstract onRender(): void
+  abstract onRender(delta: number): void
   action = undefined
 
   /**

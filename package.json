@@ -22,6 +22,7 @@
     "vite": "^2.5.0"
   },
   "dependencies": {
+    "@pixi/particle-emitter": "^5.0.2",
     "free-tex-packer-core": "^0.3.4",
     "matter-js": "^0.17.1",
     "pixi-spine": "^3.0.13",
