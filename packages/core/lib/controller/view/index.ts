@@ -1,4 +1,5 @@
 import { Container } from "pixi.js";
+import type { World } from "../../..";
 import { Atom } from "../../chain/atom";
 import { Controller } from "../controller";
 
@@ -10,9 +11,14 @@ export abstract class ViewController extends Controller {
   }
   init() {
     super.init();
-    this.changeView(!!this.belonger!.world);
-    this.belonger!.on('getworld', () => this.changeView(true));
-    this.belonger!.on('loseworld', () => this.changeView(false));
+    const world = this.belonger as World;
+    if (world.isWorld) {
+      world.beforeContainer.addChild(this.container);
+    } else {
+      this.changeView(!!this.belonger!.world);
+      this.belonger!.on('getworld', () => this.changeView(true));
+      this.belonger!.on('loseworld', () => this.changeView(false));
+    };
   }
   onTime(delta: number) {
     this.onRender(delta);
@@ -20,7 +26,7 @@ export abstract class ViewController extends Controller {
 
   changeView(add: boolean) {
     if (add) {
-      this.belonger!.world!.container.addChild(this.container);
+      this.belonger!.world!.childContainer.addChild(this.container);
     } else {
       this.container?.parent?.removeChild(this.container);
     };
@@ -35,4 +41,11 @@ export abstract class ViewController extends Controller {
    */
   abstract insertAction(_action: unknown): number
   abstract removeAction(_index: number): void
+  destroy() {
+    if (this._destroyed) return;
+    this.container.destroy({
+      children: true
+    });
+    super.destroy();
+  }
 }

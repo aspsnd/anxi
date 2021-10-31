@@ -1,6 +1,6 @@
 import { AttributeController } from "../controller/attribute";
 import { Attribute } from "../controller/attribute/attribute";
-import { Controller } from "../controller/controller";
+import { RelaxController } from "../controller/controller";
 import { AnxiEvent } from "../event/event";
 import { AnxiEventer } from "../event/eventer";
 import type { World } from "./world";
@@ -14,17 +14,21 @@ export interface AtomAttrBlock extends Record<string, number> {
   timeSpeed: number
   timeSlot: 0
 }
+export interface MoveStruct {
+  old: number,
+  value: number
+}
 /**
  * 对标Unity的GameObject.
  * 默认自带AttributeController，并且拥有时间速度概念
  */
 export class Atom<A extends AtomAttrBlock = AtomAttrBlock> extends AnxiEventer<GlobalMixins.WholeAtomEvents> {
 
-  controllers: { [key: string]: Controller<Atom, any> } = {}
-  get<T extends Controller>(constructor: new (...args: any[]) => T): T {
+  controllers: { [key: string]: RelaxController } = {}
+  get<T extends RelaxController>(constructor: new (...args: any[]) => T): T {
     return this.controllers[constructor.name] as T;
   }
-  remove<T extends Controller>(controller: T) {
+  remove<T extends RelaxController>(controller: T) {
     controller.destroy();
     delete this.controllers[controller.name];
   }
@@ -125,14 +129,22 @@ export class Atom<A extends AtomAttrBlock = AtomAttrBlock> extends AnxiEventer<G
     parent.on('time', (e) => {
       return this._destroyed || this.onFrame(e.data[1]);
     });
-    parent.on('destroy', () => {
+    const eventer = new AnxiEventer<any>();
+    parent.registerProxy(eventer);
+    eventer.once('destroy', () => {
       this.destroy();
+    })
+    this.once('destroy', _ => {
+      parent.releaseProxy(eventer);
     })
   }
 
   _destroyed = false;
   destroy() {
     if (this._destroyed) return;
+    for (const controller of Object.values(this.controllers)) {
+      controller.destroy();
+    }
     this._destroyed = true;
     this.on(new AnxiEvent('destroy'));
     this.removeListenersAbsolute();

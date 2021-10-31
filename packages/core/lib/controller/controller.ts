@@ -1,6 +1,16 @@
 import { Atom } from "../chain/atom";
 import { AnxiEventer, BEN } from "../event/eventer";
 
+
+export interface RelaxController {
+  eventer: AnxiEventer<GlobalMixins.WholeAtomEvents>
+  belonger?: Atom
+  name: string
+  init(): void
+  refresh(): void
+  onTime(_delta: number): void
+  destroy(): void
+}
 /**
  * 控制器的抽象
  */

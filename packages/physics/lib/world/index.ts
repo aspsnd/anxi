@@ -8,10 +8,17 @@ export interface PhysicsWorldOptions extends Matter.IEngineDefinition {
   deltaConfig: {
     constDelta?: number,
     getter?: (delta: number) => number
+  },
+  devCanvas?: HTMLCanvasElement,
+  dev?: {
+    width?: number,
+    height?: number
   }
 }
 export class PhysicsWorldController extends Controller {
   engine: Matter.Engine
+  devtool: boolean = false
+  render?: Matter.Render
   constructor(world: World, readonly options: PhysicsWorldOptions) {
     super(world, true);
     this.engine = Matter.Engine.create(options);
@@ -24,6 +31,18 @@ export class PhysicsWorldController extends Controller {
       this.onTime = function (delta: number) {
         Matter.Engine.update(this.engine, getter(delta));
       }
+    }
+    if (options.devCanvas) {
+      this.devtool = true;
+      this.render = Matter.Render.create({
+        engine: this.engine,
+        canvas: options.devCanvas,
+        options: {
+          width: options.dev?.width ?? 750,
+          height: options.dev?.height ?? 1334,
+        },
+      });
+      Matter.Render.run(this.render);
     }
     this.init();
   }
@@ -38,8 +57,8 @@ export class PhysicsWorldController extends Controller {
         const pairs = e.pairs;
         for (const pair of pairs) {
           const { bodyA, bodyB } = pair;
-          bodyA[PhysicsControllerFlag].emit(new AnxiEvent(en, bodyB));
-          bodyB[PhysicsControllerFlag].emit(new AnxiEvent(en, bodyA));
+          bodyA[PhysicsControllerFlag]?.emit(new AnxiEvent(en, bodyB[PhysicsControllerFlag]));
+          bodyB[PhysicsControllerFlag]?.emit(new AnxiEvent(en, bodyA[PhysicsControllerFlag]));
         };
       })
     }

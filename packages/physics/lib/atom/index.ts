@@ -1,5 +1,5 @@
-import { Atom, Controller } from "@anxi/core";
-import Matter from "matter-js";
+import { Atom, Controller, MoveStruct } from "@anxi/core";
+import Matter, { Body } from "matter-js";
 import { PhysicsWorldController } from "../world";
 
 // export type Option = Matter.IBodyDefinition | Matter.ICompositeDefinition;
@@ -15,17 +15,17 @@ export type PhysicsControllerOptions<T extends boolean = boolean> = T extends tr
 export const PhysicsControllerFlag: unique symbol = Symbol();
 export type PhysicsControllerFlag = typeof PhysicsControllerFlag;
 export type PhysicsControllerEventNames = 'collisionStart' | 'collisionActive' | 'collisionEnd';
-
 export class PhysicsController<T extends boolean> extends Controller<Atom, PhysicsControllerEventNames> {
   box: T extends true ? Matter.Body : Matter.Composite
   constructor(atom: Atom, readonly options: PhysicsControllerOptions<T>, public updateFunc?: (_: PhysicsController<T>) => void) {
-    super(atom);
+    super(atom, true);
     if (options.isBody) {
       this.box = (options.body ?? Matter.Body.create(options.option ?? {})) as this['box'];
     } else {
       this.box = (options.composite ?? Matter.Composite.create(options.option)) as this['box'];
     }
     this.box[PhysicsControllerFlag] = this as this['box'][PhysicsControllerFlag];
+    this.init();
   }
   init() {
     super.init();
@@ -34,7 +34,17 @@ export class PhysicsController<T extends boolean> extends Controller<Atom, Physi
     });
     this.belonger!.on('loseworld', () => {
       this.belonger && Matter.Composite.remove(this.belonger.world!.get(PhysicsWorldController).engine.world!, this.box);
-    })
+    });
+    this.options.isBody && this.belonger!.on('movex', e => {
+      const struct = e.data[0] as MoveStruct;
+      Matter.Body.setPosition(this.box as Body, { x: struct.value, y: this.belonger!.y });
+      struct.value = (this.box as Body).position.x;
+    });
+    this.options.isBody && this.belonger!.on('movey', e => {
+      const struct = e.data[0] as MoveStruct;
+      Matter.Body.setPosition(this.box as Body, { x: this.belonger!.x, y: struct.value });
+      struct.value = (this.box as Body).position.y;
+    });
   }
   destroy() {
     super.destroy();

@@ -56,5 +56,8 @@
     "packages/*/global.d.ts",
     "packages/**/*.ts",
     "packages/*/index.ts"
-  ]
+  ],
+  "ts-node": {
+    "transpileOnly": true
+  }
 }

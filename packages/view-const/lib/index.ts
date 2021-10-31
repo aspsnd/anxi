@@ -12,8 +12,8 @@ export class ConstViewer<T extends DisplayObject> extends ViewController {
   removeAction(_index: number): never {
     throw new Error('The ConstViewer will never implement it');
   }
-  constructor(atom: Atom, public obj: T) {
+  constructor(atom: Atom, public view: T) {
     super(atom);
-    this.container.addChild(obj);
+    this.container.addChild(view);
   }
 }
