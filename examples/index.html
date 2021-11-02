@@ -14,6 +14,7 @@
       }
       window.onkeydown = (e) => {
         if (!e.ctrlKey || e.key !== '1') return;
+        e.preventDefault();
         if (state) {
           app.stop();
           state = false;
