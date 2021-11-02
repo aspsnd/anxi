@@ -1,6 +1,6 @@
 import { App, Atom, StateController, World } from "@anxi/core"
 import { ActionData, MatrixViewer } from "@anxi/view-matrix";
-import { Matrix, Sprite, Texture, Transform } from "pixi.js";
+import { Matrix, Sprite, Texture, Transform, Ticker } from "pixi.js";
 
 export default async () => {
   let app = new App({
@@ -12,6 +12,8 @@ export default async () => {
   __DEV__(app);
   app.start();
 
+  app.ticker.speed = 2
+
   const m = new Matrix();
   window.m = m;
 
@@ -19,7 +21,16 @@ export default async () => {
   window.a = a;
 
   const world = new World();
-  app.ticker.add((delta) => world.onFrame(delta));
+
+  (() => {
+    let last = 0;
+    app.ticker.add((delta) => {
+      last += delta;
+      if (last < 1) return;
+      last -= 1;
+      world.onFrame(1);
+    });
+  })()
   app.stage.addChild(world.container);
 
   for (let i = 0; i < 9; i++) {
@@ -30,7 +41,7 @@ export default async () => {
 
     atom.land(world);
     atom.x = 200 * (i % 3) + 200;
-    atom.y = 400 * ~~(i / 3)+ 200;
+    atom.y = 400 * ~~(i / 3) + 200;
 
     const stateController = window.state = new StateController(atom, {
       'idle': 0
