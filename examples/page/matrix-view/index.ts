@@ -1,6 +1,6 @@
 import { App, Atom, StateController, World } from "@anxi/core"
 import { ActionData, MatrixViewer } from "@anxi/view-matrix";
-import { Matrix, Sprite, Texture, Transform, Ticker } from "pixi.js";
+import { Matrix, Sprite, Texture, Transform } from "pixi.js";
 
 export default async () => {
   let app = new App({
