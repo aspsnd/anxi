@@ -1,29 +1,16 @@
-import { Container, TickerCallback, Application } from 'pixi.js';
-import { Atom } from "./atom";
+import { Quark } from './Quark';
 
-export class World extends Atom {
+export class World extends Quark {
   time = 0
-  frame = 0
+  parentTime = 0
   isWorld = true
-  container = new Container()
-  beforeContainer = new Container()
-  childContainer = new Container()
-  afterContainer = new Container()
-  ticker?: TickerCallback<void>
-  app?: Application
-  constructor(base?: ConstructorParameters<typeof Atom>[0]) {
+  constructor(base?: ConstructorParameters<typeof Quark>[0]) {
     super(base);
-    this.container.addChild(this.beforeContainer, this.childContainer, this.afterContainer);
   }
-  bind(app: Application, stage: Container) {
-    this.app = app;
-    this.ticker = (delta: number) => this.onFrame(delta);
-    app.ticker.add(this.ticker);
-    stage.addChild(this.container);
-    return this;
+  bind() {
+    
   }
   destroy() {
-    this.ticker && this.app?.ticker.remove(this.ticker);
     super.destroy();
   }
 }

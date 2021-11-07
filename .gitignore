@@ -13,3 +13,5 @@ _*
 texture
 tex
 map.json
+
+packages/_*

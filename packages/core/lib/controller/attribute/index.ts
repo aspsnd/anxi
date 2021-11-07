@@ -1,5 +1,5 @@
 import { Attribute } from "./attribute";
-import { Atom } from "../../chain/atom";
+import { Atom } from "../../chain/Atom";
 import { Controller } from "../controller";
 
 export class AttributeController<S extends string = string> extends Controller {

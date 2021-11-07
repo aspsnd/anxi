@@ -1,6 +1,6 @@
-export class AnxiTicker {
+export class Ticker {
   static _started = false
-  static tickers = new Set<AnxiTicker>()
+  static tickers = new Set<Ticker>()
   static lastTime = performance.now()
   static start() {
     this._started = true;
@@ -20,16 +20,16 @@ export class AnxiTicker {
   deltaThreshold:number
   lastTime = 0
   lastLastDelta = 0
-  constructor(fps: number = 60, public aheadThresholdRate = .5) {
+  constructor(fps: number = 60, public aheadThresholdRate = .75) {
     this.deltaTime = 1000 / fps;
     this.deltaThreshold = aheadThresholdRate * this.deltaTime;
-    AnxiTicker.tickers.add(this);
+    Ticker.tickers.add(this);
   }
 
   ruuning = false;
   start(){
-    if(!AnxiTicker._started)AnxiTicker.start();
-    this.lastTime = AnxiTicker.lastTime;
+    if(!Ticker._started)Ticker.start();
+    this.lastTime = Ticker.lastTime;
     this.ruuning = true;
   }
   stop(){
@@ -51,7 +51,15 @@ export class AnxiTicker {
 
   }
   destroy() {
-    AnxiTicker.tickers.delete(this);
+    Ticker.tickers.delete(this);
+  }
+
+  private _funcs = new Set<()=>void>()
+  add(func:()=>void){
+    this._funcs.add(func);
+  }
+  remove(func:()=>void){
+    this._funcs.delete(func);
   }
 
 }

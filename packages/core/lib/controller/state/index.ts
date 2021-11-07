@@ -1,6 +1,6 @@
 import { State } from "./state";
 import { Controller } from "../controller";
-import { Atom } from "../../chain/atom";
+import { Atom } from "../../chain/Atom";
 import { AnxiEvent } from "../../event/event";
 import { StateItem } from "./item";
 

@@ -1,4 +1,4 @@
-import { Atom } from "../../chain/atom";
+import { Atom } from "../../chain/Atom";
 import type { AnxiListener, AnxiPlainListener, BEN } from "../../event/eventer";
 import { AnxiEventer } from "../../event/eventer";
 import type { SkillProto } from "./proto";

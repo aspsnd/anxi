@@ -1,7 +1,7 @@
 import { AttributeCaculator } from "../attribute/attribute";
 import { AnxiEvent } from "../../event/event";
 import { Skill } from "./skill";
-import { Atom } from "../../chain/atom";
+import { Atom } from "../../chain/Atom";
 
 export interface HandlerGetter<D, T> {
   (atom: Atom, skill: Skill<D, T>): (e: AnxiEvent) => void

@@ -17,11 +17,6 @@ export interface AsyncAnxiListener<EN extends BEN> extends AnxiListener<EN> {
   handler: AsyncAnxiHandler<EN>
 }
 
-export interface ProxyEventer<EventName extends BEN> {
-  eventer: AnxiEventer<EventName>
-  valid: boolean
-}
-
 /**
  * - 支持异步事件
  * - 支持事件拦截
@@ -81,7 +76,7 @@ export class AnxiEventer<EventName extends BEN = BEN> {
     }
     this._emitingDepth--;
     for (const proxy of this.proxys) {
-      proxy.valid && proxy.eventer.emit(e as AnxiEvent<EventName>);
+      proxy.emit(e as AnxiEvent<EventName>);
     }
     /**
      * 在达到一定次数可清理时机时进行清理
@@ -155,7 +150,6 @@ export class AnxiEventer<EventName extends BEN = BEN> {
     for (const key of this._asyncListeners.keys()) {
       this._asyncListeners.set(key, this._asyncListeners.get(key)!.filter(l => l.valid));
     }
-    this.proxys = this.proxys.filter(({ valid }) => valid);
   }
   removeListeners() {
     if (this._emitingDepth > 0) this.warn('some event is emitting!');
@@ -183,17 +177,11 @@ export class AnxiEventer<EventName extends BEN = BEN> {
     if (!this.debug_warn) return;
     console.warn(...msg);
   }
-  proxys: ProxyEventer<EventName>[] = []
+  proxys: Set<AnxiEventer<EventName>> = new Set()
   registerProxy(eventer: AnxiEventer<EventName>) {
-    this.proxys.push({
-      eventer,
-      valid: true
-    })
+    this.proxys.add(eventer);
   }
   releaseProxy(eventer: AnxiEventer<EventName>) {
-    const proxy = this.proxys.find(({ eventer: _e }) => _e === eventer);
-    if (proxy) {
-      proxy.valid = false;
-    }
+    this.proxys.delete(eventer);
   }
 }

@@ -1,6 +1,4 @@
-export * from "./lib/app/index";
-export * from "./lib/chain/atom";
-export * from "./lib/chain/flyer";
+export * from "./lib/chain/Atom";
 export * from "./lib/chain/world";
 export * from "./lib/controller/controller";
 export * from "./lib/controller/attribute/index";
@@ -9,7 +7,6 @@ export * from "./lib/controller/skill/index";
 export * from "./lib/controller/skill/proto";
 export * from "./lib/controller/skill/skill";
 export * from "./lib/controller/state/state";
-export * from "./lib/controller/view";
 export * from "./lib/controller/state/index"
 export * from "./lib/controller/state/item"
 export * from "./lib/controller/state/state"
