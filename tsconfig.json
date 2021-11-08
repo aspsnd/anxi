@@ -31,20 +31,35 @@
       "node"
     ],
     "paths": {
+      "@anxi/app": [
+        "./packages/app"
+      ],
       "@anxi/core": [
         "./packages/core"
-      ],
-      "@anxi/vdom": [
-        "./packages/vdom"
       ],
       "@anxi/img-packer": [
         "./packages/img-packer"
       ],
+      "@anxi/physics": [
+        "./packages/physics"
+      ],
+      "@anxi/render": [
+        "./packages/render"
+      ],
+      "@anxi/vdom": [
+        "./packages/vdom"
+      ],
       "@anxi/view-const": [
         "./packages/view-const"
       ],
-      "@anxi/physics": [
-        "./packages/physics"
+      "@anxi/view-matrix": [
+        "./packages/view-matrix"
+      ],
+      "@anxi/view-particle": [
+        "./packages/view-particle"
+      ],
+      "@anxi/view-spine": [
+        "./packages/view-spine"
       ],
       "@anxi/*": [
         "./packages/*"

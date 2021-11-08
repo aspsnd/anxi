@@ -7,7 +7,6 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "allowJs": true,
-    "noUnusedLocals": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
@@ -18,7 +17,6 @@
     "downlevelIteration": true,
     "noImplicitReturns": false,
     "allowSyntheticDefaultImports": true,
-    "strictNullChecks": true,
     "strict": true,
     "strictFunctionTypes": true,
     "lib": [
@@ -38,5 +36,8 @@
     "./*",
     "../packages/img-packer/*",
     "../node_modules"
-  ]
+  ],
+  "ts-node": {
+    "transpileOnly": true
+  }
 }

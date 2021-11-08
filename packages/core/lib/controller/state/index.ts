@@ -1,6 +1,6 @@
 import { State } from "./state";
 import { Controller } from "../controller";
-import { Atom } from "../../chain/Atom";
+import { Quark } from "../../chain/Quark";
 import { AnxiEvent } from "../../event/event";
 import { StateItem } from "./item";
 
@@ -38,8 +38,8 @@ export class StateController extends Controller {
   getExistState(index: StateIndex) {
     return this.stateMap.has(index) ? this.stateMap.get(index)! : this.registerState(index, !!StateController.stateMap[index]);
   }
-  constructor(atom: Atom, public block: StateControllerOptions) {
-    super(atom, true);
+  constructor(quark: Quark, public block: StateControllerOptions) {
+    super(quark, true);
     this.init();
   }
   init() {

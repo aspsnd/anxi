@@ -1,4 +1,4 @@
-import type { Atom, StateController } from "@anxi/core";
+import type { Quark, StateController } from "@anxi/core";
 import { Matrix } from "pixi.js"
 import { standardize } from "./util";
 
@@ -9,7 +9,7 @@ export type BaseActionValue = [x: number, y: number] |
 [a: number, y: number, angle: number, scaleX: number, scaleY: number];
 
 // 高度定制，可实现任意效果
-export type CaculatorActionValue = (time: number, state: StateController, atom: Atom) => Matrix
+export type CaculatorActionValue = (time: number, state: StateController, quark: Quark) => Matrix
 
 export type ActionValue = BaseActionValue | CaculatorActionValue;
 

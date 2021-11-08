@@ -11,10 +11,6 @@ export interface AtomAttrBlock extends Record<string, number> {
   timeSpeed: number
   timeSlot: 0
 }
-export interface MoveStruct {
-  old: number,
-  value: number
-}
 /**
  * 默认自带AttributeController
  * 时间速度的实现方式改变为依赖于AttributeController

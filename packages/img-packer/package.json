@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "aspsnd <2546697613@qq.com>",
-  "homepage": "https://github.com/aspsnd/Anxi.ts#readme",
+  "homepage": "https://github.com/aspsnd/anxi#readme",
   "license": "MIT",
   "main": "index.ts",
   "directories": {
@@ -15,12 +15,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aspsnd/Anxi.ts.git"
+    "url": "git+https://github.com/aspsnd/anxi.git"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
-    "url": "https://github.com/aspsnd/Anxi.ts/issues"
+    "url": "https://github.com/aspsnd/anxi/issues"
   }
 }

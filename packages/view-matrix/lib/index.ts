@@ -1,4 +1,5 @@
-import { Atom, StateController, ViewController } from "@anxi/core";
+import { Quark, StateController } from "@anxi/core";
+import { ViewController } from "@anxi/render";
 import { Matrix, Sprite } from "pixi.js";
 import { getCurrent } from "..";
 import { ActionStruct, StandardActionStruct, ActionData } from "./action";
@@ -17,12 +18,12 @@ export const enum MatrixViewerRenderType {
 
 export class MatrixViewer extends ViewController {
 
-  actionSelector?: (atom: Atom, viewer: MatrixViewer) => [number, number]
+  actionSelector?: (quark: Quark, viewer: MatrixViewer) => [number, number]
 
   transform = new Matrix()
   baseAction: StandardActionStruct
-  constructor(atom: Atom, baseAction: ActionData | ActionStruct) {
-    super(atom);
+  constructor(quark: Quark, baseAction: ActionData | ActionStruct) {
+    super(quark);
     this.baseAction = baseAction instanceof ActionData ? baseAction.standard : new ActionData(baseAction).standard;
   }
 
@@ -40,18 +41,18 @@ export class MatrixViewer extends ViewController {
     this.container.transform.setFromMatrix(new Matrix().translate(this.belonger!.x, this.belonger!.y).append(this.transform));
     let stateIndex!: string | number, time!: number;
     if (this.renderType === MatrixViewerRenderType.FromState) {
-      const state = this.belonger?.get(StateController).headState!;
+      const state = this.belonger.get(StateController).headState!;
       stateIndex = state.index;
       time = state.headTime;
     } else if (this.renderType === MatrixViewerRenderType.FromGetter) {
-      [stateIndex, time] = this.actionSelector!(this.belonger!, this);
+      [stateIndex, time] = this.actionSelector!(this.belonger, this);
     }
     for (const bodyIndex in this.bodys) {
       let sprite = this.bodys[bodyIndex];
       let action = this.insertedAction?.[bodyIndex] || this.baseAction[stateIndex][bodyIndex] || this.baseAction[0][bodyIndex];
       if (!action) continue;
       const current = getCurrent(action, time);
-      let result = current instanceof Function ? current(time, this.belonger!.get(StateController), this.belonger!) : current;
+      let result = current instanceof Function ? current(time, this.belonger!.get(StateController), this.belonger) : current;
       sprite.transform.setFromMatrix(result);
     }
   }

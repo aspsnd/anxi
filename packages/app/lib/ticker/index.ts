@@ -48,7 +48,9 @@ export class Ticker {
     this.lastLastDelta = last;
   }
   onTime(){
-
+    for(const func of this._funcs){
+      func();
+    }
   }
   destroy() {
     Ticker.tickers.delete(this);

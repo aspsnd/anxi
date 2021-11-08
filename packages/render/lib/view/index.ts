@@ -1,12 +1,13 @@
 import { Container } from "pixi.js";
-import { Atom } from "@anxi/core";
+import { Quark } from "@anxi/core";
 import { Controller } from "@anxi/core";
 import { WorldViewController } from "./WorldViewer";
+import { RendererViewController } from "@anxi/render";
 
 export abstract class ViewController extends Controller {
   container = new Container()
-  constructor(atom: Atom, lateInit = false) {
-    super(atom, true);
+  constructor(quark: Quark, lateInit = false) {
+    super(quark, true);
     lateInit || this.init();
   }
   init() {
@@ -20,11 +21,12 @@ export abstract class ViewController extends Controller {
     this.onRender(delta);
   }
 
+
   changeView(add: boolean) {
     if (add) {
       const world = this.belonger.world!;
-      const worldViewer = world.get(WorldViewController);
-      if(!worldViewer)throw new Error("can not add ViewController on atom whose world hasn't WorldViewController.");
+      const worldViewer = world.get(WorldViewController) || world.get(RendererViewController);
+      if(!worldViewer)throw new Error("can not add ViewController on quark whose world hasn't WorldViewController.");
       worldViewer.container.addChild(this.container);
     } else {
       this.container.parent.removeChild(this.container);

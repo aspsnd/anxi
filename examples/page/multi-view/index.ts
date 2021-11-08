@@ -1,7 +1,8 @@
 import { SpineViewer } from "@anxi/view-spine";
-import { App, World, Atom, AnxiLoader, StateController } from "@anxi/core";
+import { World, Atom, AnxiLoader, StateController } from "@anxi/core";
 import { Text, Sprite, Texture } from "pixi.js";
 import { ActionData, MatrixViewer } from "@anxi/view-matrix";
+import { App } from "@anxi/app";
 export default async function () {
   let app = new App({
     view: appCanvas,
@@ -9,9 +10,8 @@ export default async function () {
     height: 1334,
     antialias: true,
   })
-  app.start();
 
-  const world = new World().bind(app, app.stage);
+  const world = app.world;
 
   const atom = window.atom = new Atom({
     timeSpeed: 1,
