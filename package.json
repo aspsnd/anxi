@@ -9,7 +9,7 @@
     "tex": "ts-node ./script/texTransfor.ts -P ./script/tsconfig.json",
     "prestart": "npm run tsconf",
     "tsconf": "node ./reconf.js",
-    "create": "ts-node ./script/create.ts -P ./script/tsconfig.json && npm run tsconf"
+    "create": "ts-node ./script/create.ts -P ./script/tsconfig.json"
   },
   "author": "Anxyser",
   "license": "MIT",

@@ -4,7 +4,7 @@ import { red, green } from "chalk";
 import minimist from "minimist";
 
 const templete = `{
-  "name": "{{pkg}}",
+  "name": "@anxi/{{pkg}}",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "anxyser <2546697613@qq.com>",
@@ -21,9 +21,6 @@ const templete = `{
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aspsnd/anxi.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/aspsnd/anxi/issues"
