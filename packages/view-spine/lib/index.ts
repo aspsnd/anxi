@@ -1,5 +1,5 @@
-import { ViewController } from "../../core/lib/controller/view";
-import { Atom, StateController } from "@anxi/core";
+import { ViewController } from "@anxi/render";
+import { Quark, StateController } from "@anxi/core";
 import { Spine } from "pixi-spine";
 import { LoaderResource } from "pixi.js";
 
@@ -9,8 +9,8 @@ export class SpineViewer extends ViewController {
 
   animateNames: string[]
 
-  constructor(atom: Atom, public resource: LoaderResource) {
-    super(atom);
+  constructor(quark: Quark, public resource: LoaderResource) {
+    super(quark);
     const data = resource.spineData;
     if (!data) throw new Error('the resource is not a valid spine resource');
     this.spine = new Spine(data);

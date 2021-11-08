@@ -1,6 +1,8 @@
 import { SpineViewer } from "@anxi/view-spine";
-import { App, World, Atom, AnxiLoader } from "@anxi/core";
+import {  World, Atom, AnxiLoader } from "@anxi/core";
 import { Text } from "pixi.js";
+import { App } from "@anxi/app";
+import { RendererViewController } from "@anxi/render";
 export default async function () {
   let app = new App({
     view: appCanvas,
@@ -8,9 +10,8 @@ export default async function () {
     height: 1334,
     antialias: true,
   })
-  app.start();
 
-  const world = new World().bind(app, app.stage);
+  const world = app.world;
 
   const atom = window.atom = new Atom({
     timeSpeed: 1,
@@ -22,7 +23,7 @@ export default async function () {
   atom.y = 500;
 
 
-  const asyncLoader = new AnxiLoader(app.loader);
+  const asyncLoader = new AnxiLoader();
   const resource = await asyncLoader.get('cat', '/img/spine/cat/0.json');
   // console.log(res);
   const spineViewer = new SpineViewer(atom, resource);
@@ -36,7 +37,7 @@ export default async function () {
     });
     text.x = 600;
     text.y = index++ * 60 + 100;
-    app.stage.addChild(text);
+    world.get(RendererViewController).beforeContainer.addChild(text);
     text.interactive = true;
     text.on('tap', _ => {
       spineViewer.spine.state.setEmptyAnimations(0);

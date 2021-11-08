@@ -1,5 +1,6 @@
-import { App } from "@anxi/core";
+import { App } from "@anxi/app";
 import { Matter } from "@anxi/physics";
+import { RendererViewController } from "@anxi/render";
 import { GameHeight, GameWidth } from "./config";
 import { SingleGame } from "./game";
 import { Plane } from "./game/plane";
@@ -11,9 +12,9 @@ export default async function () {
     width: GameWidth,
     height: GameHeight,
   });
-  __DEV__(app);
-  window.app = app;
-  const game = window.game = new SingleGame().bind(app, app.stage);
+
+  const game = window.game = new SingleGame();
+  game.land(app.world);
   game.init();
 
 
@@ -26,7 +27,7 @@ export default async function () {
   const director = new Director({});
   director.outerX = GameWidth >> 1;
   director.outerY = GameHeight - 300;
-  app.stage.addChild(director);
+  app.world.get(RendererViewController).afterContainer.addChild(director);
 
   player.on('time', () => {
     Matter.Body.setVelocity(player.box, {

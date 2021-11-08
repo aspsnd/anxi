@@ -29,7 +29,7 @@ export abstract class ViewController extends Controller {
       if(!worldViewer)throw new Error("can not add ViewController on quark whose world hasn't WorldViewController.");
       worldViewer.container.addChild(this.container);
     } else {
-      this.container.parent.removeChild(this.container);
+      this.container.parent?.removeChild(this.container);
     };
     return this._destroyed;
   }

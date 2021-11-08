@@ -7,6 +7,7 @@ import { Matter, PhysicsController, PhysicsWorldController } from "@anxi/physics
 import { GameHeight, GameWidth } from "../config";
 import "./canvas.scss";
 import { Sprite } from "@pixi/sprite";
+import { WorldViewController } from "@anxi/render/lib/view/WorldViewer";
 
 export class SingleGame extends World {
   atomContainer = new Container()
@@ -17,6 +18,7 @@ export class SingleGame extends World {
   constructor() {
     super();
     new ConstViewer(this, this.bg);
+    new WorldViewController(this);
     const canvas = document.createElement('canvas');
     canvas.id = 'helper-canvas';
     document.body.append(canvas);
@@ -73,9 +75,9 @@ export class SingleGame extends World {
   init() {
 
   }
-  onTime(delta: number) {
-    super.onTime(delta);
-    this.bg.tilePosition.y += delta;
+  onTime(timestamp: number) {
+    super.onTime(timestamp);
+    this.bg.tilePosition.y = timestamp/6;
     if (Math.random() < .016) {
       this.dropEnemy();
     }
@@ -100,8 +102,8 @@ export class SingleGame extends World {
         }
       }),
     }, controller => {
-      enemy._x = controller.box.position.x;
-      enemy._y = controller.box.position.y;
+      enemy.x = controller.box.position.x;
+      enemy.y = controller.box.position.y;
       viewer.view.rotation = controller.box.angle;
     });
 

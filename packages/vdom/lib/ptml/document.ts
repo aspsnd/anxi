@@ -1,4 +1,4 @@
-import { App } from "@anxi/core";
+import { App } from "@anxi/app";
 import { Application, Container } from "pixi.js";
 import { ABaseElement } from "../core";
 import { AStyle } from "../pcss/style";

@@ -1,4 +1,5 @@
-import { Atom, ViewController } from "@anxi/core";
+import { Quark } from "@anxi/core";
+import { ViewController } from "@anxi/render";
 import { DisplayObject } from "pixi.js";
 
 export class ConstViewer<T extends DisplayObject> extends ViewController {
@@ -12,8 +13,8 @@ export class ConstViewer<T extends DisplayObject> extends ViewController {
   removeAction(_index: number): never {
     throw new Error('The ConstViewer will never implement it');
   }
-  constructor(atom: Atom, public view: T) {
-    super(atom);
+  constructor(quark: Quark, public view: T) {
+    super(quark);
     this.container.addChild(view);
   }
 }

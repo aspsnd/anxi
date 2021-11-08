@@ -1,7 +1,8 @@
-import { Atom, ViewController } from "@anxi/core";
+import { Quark } from "@anxi/core";
+import { ViewController } from "@anxi/render";
 import { Emitter, EmitterConfigV3 } from "@pixi/particle-emitter";
 
-export interface ParticleViewerOptinos extends EmitterConfigV3 {
+export interface ParticleViewerOptions extends EmitterConfigV3 {
 
 }
 export class ParticleViewer extends ViewController {
@@ -13,15 +14,18 @@ export class ParticleViewer extends ViewController {
 		throw new Error("Method not implemented.");
 	}
 	readonly emitter: Emitter
-	constructor(public atom: Atom, config: ParticleViewerOptinos) {
-		super(atom);
+	constructor(public quark: Quark, config: ParticleViewerOptions) {
+		super(quark);
 		this.emitter = new Emitter(this.container, config);
 		this.emitter.emit = true;
 	}
-	onRender(delta: number): void {
+	private _lastTime = 0
+	onRender(timestamp: number): void {
+		const delta = timestamp - this._lastTime;
+		this._lastTime = timestamp;
 		this.container.x = this.belonger!.x;
 		this.container.y = this.belonger!.y;
-		this.emitter.update(delta / 60);
+		this.emitter.update(delta / 1000);
 	}
 	private _x = 0
 	/**

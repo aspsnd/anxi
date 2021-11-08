@@ -1,9 +1,12 @@
-import { App, Atom, World } from "@anxi/core";
+import { Atom, World } from "@anxi/core";
 import { ADocument } from "@anxi/vdom";
 import { ConstViewer } from "@anxi/view-const";
 import { Graphics } from "pixi.js"
 import { PhysicsController, PhysicsWorldController, Matter } from "@anxi/physics";
 import { GameHeight, GameWidth } from "./src/global/config";
+import { App } from "@anxi/app";
+import { RendererViewController } from "@anxi/render";
+
 export default async () => {
   const app = new App({
     view: appCanvas,
@@ -19,12 +22,6 @@ export default async () => {
     }
   });
   const world = new World();
-
-  app.eventer.on('onframe', e => {
-    world.onFrame(e.data[1]);
-  })
-
-  document.customerView.addChild(world.container);
 
   const physicsWorld = new PhysicsWorldController(world, {
     deltaConfig: {
@@ -103,7 +100,7 @@ export default async () => {
 
   bow.land(world);
 
-  document.link(app.stage);
+  document.link(app.world.get(RendererViewController).beforeContainer);
 
   Matter.Body.setVelocity(bowBox.box, {
     x: 0,

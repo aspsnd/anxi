@@ -1,4 +1,6 @@
-import { App, Atom, World } from "@anxi/core"
+import { App } from "@anxi/app";
+import { Atom } from "@anxi/core"
+import { RendererViewController } from "@anxi/render";
 import { ParticleViewer } from "@anxi/view-particle";
 import type { InteractionEvent } from "@pixi/interaction";
 
@@ -8,14 +10,9 @@ export default async () => {
     width: 750,
     height: 1334,
     antialias: true,
-    sharedLoader: true
   })
-  __DEV__(app);
-  app.start();
 
-  const world = new World();
-  app.ticker.add((delta) => world.onFrame(delta));
-  app.stage.addChild(world.container);
+  const world = app.world;
 
   const atom = window.atom = new Atom({
     timeSpeed: 1,
@@ -31,8 +28,8 @@ export default async () => {
   view.x = 750 >> 1;
   view.y = 1334 >> 1;
 
-  app.stage.interactive = true;
-  app.stage.on('pointermove', (e: InteractionEvent) => {
+  world.get(RendererViewController).container.interactive = true;
+  world.get(RendererViewController).container.on('pointermove', (e: InteractionEvent) => {
     view.x = e.data.global.x;
     view.y = e.data.global.y;
   })
