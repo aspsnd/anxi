@@ -3,7 +3,7 @@ import { Atom, AnxiLoader, StateController } from "@anxi/core";
 import { Text, Sprite, Texture } from "pixi.js";
 import { ActionData, MatrixViewer } from "@anxi/view-matrix";
 import { App } from "@anxi/app";
-import { Loader, RendererViewController } from "@anxi/render"
+import { RendererViewController } from "@anxi/render"
 
 export default async function () {
   let app = new App({

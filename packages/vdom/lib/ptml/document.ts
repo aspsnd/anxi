@@ -1,14 +1,13 @@
-import { App } from "@anxi/app";
 import { Application, Container } from "pixi.js";
 import { ABaseElement } from "../core";
 import { AStyle } from "../pcss/style";
 
 
-export interface ADocumentOptions<T extends Application | App = App> {
+export interface ADocumentOptions<T extends Application = Application> {
   app: T,
   style?: Partial<AStyle>
 }
-export class ADocument<T extends Application | App> extends ABaseElement {
+export class ADocument<T extends Application> extends ABaseElement {
   app: T
   constructor(public options: ADocumentOptions<T>) {
     super(options.style);

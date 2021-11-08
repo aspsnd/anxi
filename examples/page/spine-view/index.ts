@@ -1,5 +1,5 @@
 import { SpineViewer } from "@anxi/view-spine";
-import {  World, Atom, AnxiLoader } from "@anxi/core";
+import { Atom, AnxiLoader } from "@anxi/core";
 import { Text } from "pixi.js";
 import { App } from "@anxi/app";
 import { RendererViewController } from "@anxi/render";
