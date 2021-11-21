@@ -24,7 +24,7 @@ export class Packer {
   async watch() {
     const watcher = watch(this.config.in);
     for await (const c of watcher) {
-      const { filename, eventType } = c;
+      const { filename } = c;
       console.log(filename);
     }
   }
