@@ -81,6 +81,12 @@
     "packages/*/index.ts",
     "bundles/anxi.js/index.ts"
   ],
+  "exclude": [
+    "**/script/**",
+    "**/types/**",
+    "bundles/**/*.d.ts",
+    "rollup.config.js"
+  ],
   "ts-node": {
     "transpileOnly": true
   }

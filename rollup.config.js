@@ -98,7 +98,7 @@ async function main() {
 
     // Create a map of globals to use for bundled packages
     packages.forEach((pkg) => {
-        namespaces[pkg.name] = pkg.config.namespace || 'PIXI';
+        namespaces[pkg.name] = pkg.config.namespace || 'ANXI';
     });
 
     packages.forEach((pkg) => {

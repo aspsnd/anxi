@@ -27,5 +27,8 @@
   },
   "dependencies": {
     "pixi-spine": "3.0.13"
+  },
+  "peerDependencies": {
+    "@anxi/render": "1.0.0"
   }
 }

@@ -13,6 +13,9 @@
     "tex": "ts-node ./script/texTransfor.ts -P ./script/tsconfig.json",
     "prestart": "npm run tsconf",
     "tsconf": "node ./reconf.js",
+    "clean:build": "rimraf \"{bundles,packages,out}/*/dist\"",
+    "clean:dist": "rimraf dist/*",
+    "clean:modules": "lerna clean --yes",
     "create": "ts-node ./script/create.ts -P ./script/tsconfig.json"
   },
   "author": "Anxyser",
