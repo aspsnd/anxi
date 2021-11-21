@@ -1,4 +1,4 @@
-import { Atom } from "../../chain/Atom";
+import { Quark } from "../../chain/Quark";
 import type { AnxiListener, AnxiPlainListener, BEN } from "../../event/eventer";
 import { AnxiEventer } from "../../event/eventer";
 import type { SkillProto } from "./proto";
@@ -32,7 +32,7 @@ export class Skill<D extends Partial<{ [key: string]: any }> = {}, T extends {} 
     this.inited = true;
     this.data = this.proto.datar.call(this);
     this.proto.initedListens.forEach(il => {
-      let ecomt = this.atom.on(il.event, il.handler(this.atom, this), true);
+      let ecomt = this.quark.on(il.event, il.handler(this.quark, this), true);
       this.listeners.push(ecomt);
     });
     this._initFunc.call(this, this.data);
@@ -40,13 +40,13 @@ export class Skill<D extends Partial<{ [key: string]: any }> = {}, T extends {} 
   remove() {
     this.removed = true;
     for (const listener of this.listeners) {
-      this.atom.removeListener(listener as AnxiListener<GlobalMixins.WholeAtomEvents>);
+      this.quark.removeListener(listener as AnxiListener<GlobalMixins.WholeQuarkEvents>);
     }
   }
 
-  atom!: Atom
-  link<K extends Atom>(atom: K) {
-    this.atom = atom;
+  quark!: Quark
+  link<K extends Quark>(quark: K) {
+    this.quark = quark;
   }
 
 }
