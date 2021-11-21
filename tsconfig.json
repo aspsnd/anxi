@@ -29,7 +29,8 @@
       "dom"
     ],
     "types": [
-      "node"
+      "node",
+      "offscreencanvas"
     ],
     "paths": {
       "@anxi/app": [
