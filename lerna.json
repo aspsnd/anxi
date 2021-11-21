@@ -1,6 +1,7 @@
 {
   "npmClient": "npm",
   "registry": "https://registry.npmjs.org/",
+  "useWorkspaces": true,
   "version": "1.0.0",
   "bootstrap": {
     "hoist": true,

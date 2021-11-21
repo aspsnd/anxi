@@ -44,7 +44,7 @@ async function main() {
         //     browser: true,
         //     preferBuiltins: false,
         // }),
-        commonjs(),
+        // commonjs(),
         json(),
         typescript(),
         // string({
@@ -129,7 +129,7 @@ async function main() {
         const external = Object.keys(dependencies || [])
             .concat(Object.keys(peerDependencies || []));
         const basePath = path.relative(__dirname, pkg.dir);
-        let input = path.join(basePath, 'src/index.ts');
+        let input = path.join(basePath, 'index.ts');
         const freeze = false;
 
         results.push({
@@ -182,11 +182,11 @@ async function main() {
         // we'll use this to generate the bundle file
         // this will package all dependencies
         if (bundle) {
-            let input = path.join(basePath, bundleInput || 'src/index.ts');
+            let input = path.join(basePath, bundleInput || 'index.ts');
 
             // TODO: remove check once all packages have been converted to typescript
             if (!fs.existsSync(input)) {
-                input = path.join(basePath, bundleInput || 'src/index.js');
+                input = path.join(basePath, bundleInput || 'index.js');
             }
 
             const file = path.join(basePath, bundle);

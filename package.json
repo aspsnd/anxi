@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "workspaces": [
+    "bundles/*",
+    "packages/*"
+  ],
   "scripts": {
     "start": "npm run dev",
     "dev": "cd ./examples && vite",
