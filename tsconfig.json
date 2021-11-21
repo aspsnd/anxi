@@ -2,7 +2,8 @@
   "compilerOptions": {
     "rootDir": "./",
     "baseUrl": "./",
-    "outDir": "dist/types",
+    "outDir": "out",
+    "declaration": true,
     "target": "es5",
     "module": "ESNext",
     "moduleResolution": "node",
@@ -40,6 +41,9 @@
       "@anxi/img-packer": [
         "./packages/img-packer"
       ],
+      "@anxi/loader": [
+        "./packages/loader"
+      ],
       "@anxi/physics": [
         "./packages/physics"
       ],
@@ -63,6 +67,9 @@
       ],
       "@anxi/*": [
         "./packages/*"
+      ],
+      "anxi.js": [
+        "./bundles/anxi.js"
       ]
     }
   },
@@ -70,7 +77,8 @@
     "packages/global.d.ts",
     "packages/*/global.d.ts",
     "packages/**/*.ts",
-    "packages/*/index.ts"
+    "packages/*/index.ts",
+    "bundles/anxi.js/index.ts"
   ],
   "ts-node": {
     "transpileOnly": true

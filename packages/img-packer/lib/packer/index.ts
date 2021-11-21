@@ -1,9 +1,8 @@
 import { v1 as uuid } from "uuid";
 import { resolve } from 'path';
-import { promises, Stats } from 'fs';
+import { promises, Stats, readFileSync } from 'fs';
 const { readdir, readFile, stat, writeFile, unlink, access, watch } = promises;
 import { packAsync, TrimMode, TexturePackerOptions } from "free-tex-packer-core";
-import { readFileSync } from "fs";
 export { TrimMode };
 export interface PackerConfig extends TexturePackerOptions {
   in: string

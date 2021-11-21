@@ -1,6 +1,13 @@
 node_modules
 dist
+build
 package-lock.json
+
+packages/_*
+
+bundles/*/*.d.ts
+out
+packages/**/index.d.ts
 
 # 作者的思路记录
 mind.md
@@ -14,4 +21,3 @@ texture
 tex
 map.json
 
-packages/_*

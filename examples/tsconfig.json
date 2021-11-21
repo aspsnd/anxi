@@ -22,6 +22,9 @@
       "@anxi/img-packer": [
         "./packages/img-packer"
       ],
+      "@anxi/loader": [
+        "./packages/loader"
+      ],
       "@anxi/physics": [
         "./packages/physics"
       ],
@@ -45,6 +48,9 @@
       ],
       "@anxi/*": [
         "./packages/*"
+      ],
+      "anxi.js": [
+        "./bundles/anxi.js"
       ]
     }
   },

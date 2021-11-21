@@ -1,0 +1,28 @@
+{
+  "name": "anxi.js",
+  "version": "1.0.0",
+  "description": "AnxiJS",
+  "author": "anxyser <2546697613@qq.com>",
+  "standalone": true,
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "bundle": "dist/browser/index.js",
+  "bundleModule": "dist/browser/index.mjs",
+  "bundleOutput": {
+    "name": "ANXI"
+  },
+  "homepage": "https://github.com/aspsnd/anxi",
+  "bugs": "https://github.com/aspsnd/anxi/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aspsnd/anxi.git"
+  },
+  "files": [
+    "lib/",
+    "dist/",
+    "*.d.ts"
+  ],
+  "dependencies": {
+  }
+}

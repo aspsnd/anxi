@@ -13,7 +13,8 @@ packages.forEach(pkg => {
     `./packages/${pkg}`
   ]
 });
-paths['@anxi/*'] = ['./packages/*']
+paths['@anxi/*'] = ['./packages/*'];
+paths['anxi.js'] = ['./bundles/anxi.js'];
 
 // reconfig root dir tsconfig
 const tsconfig = JSON.parse(readFileSync('./tsconfig.json', 'utf8'));
