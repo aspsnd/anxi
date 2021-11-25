@@ -1,3 +1,1 @@
-export * from "./lib/pixi";
-export * from "./lib/view";
-export * from "./lib";
+export * from "pixi.js";

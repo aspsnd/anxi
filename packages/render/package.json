@@ -27,5 +27,8 @@
   },
   "bugs": {
     "url": "https://github.com/aspsnd/anxi/issues"
+  },
+  "dependencies": {
+    "pixi.js": "^6.1.2"
   }
 }

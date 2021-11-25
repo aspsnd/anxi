@@ -1,6 +1,6 @@
 export * from "./lib/chain/Atom";
 export * from "./lib/chain/Quark";
-export * from "./lib/chain/world";
+export * from "./lib/chain/World";
 export * from "./lib/controller/controller";
 export * from "./lib/controller/attribute/index";
 export * from "./lib/controller/attribute/attribute";

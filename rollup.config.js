@@ -1,10 +1,10 @@
 import path from 'path';
 // import transpile from '@rollup/plugin-buble';
-// import resolve from '@rollup/plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 // import { string } from 'rollup-plugin-string';
 // import sourcemaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
-// import commonjs from '@rollup/plugin-commonjs';
+import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import { terser } from 'rollup-plugin-terser';
 import jscc from 'rollup-plugin-jscc';
@@ -40,13 +40,15 @@ function prodName(name) {
 async function main() {
 	const commonPlugins = [
 		// sourcemaps(),
-		// resolve({
-		//     browser: true,
-		//     preferBuiltins: false,
-		// }),
-		// commonjs(),
+		resolve({
+			browser: true,
+			preferBuiltins: false,
+		}),
+		commonjs(),
 		json(),
-		typescript(),
+		typescript({
+			useTsconfigDeclarationDir: true
+		}),
 		// string({
 		//     include: [
 		//         '**/*.frag',
@@ -88,7 +90,7 @@ async function main() {
 
 	// Collect the list of packages
 	await workspacesRun({ cwd: __dirname, orderByDeps: true }, async (pkg) => {
-		if (!pkg.config.private) {
+		if (!pkg.config.private && ['@anxi/core', '@anxi/render'].includes(pkg.name)) {
 			packages.push(pkg);
 		}
 	});
@@ -274,6 +276,6 @@ async function main() {
 }
 const config = main();
 (async () => {
-	console.log(await config);
+	fs.writeFileSync('./config.js', JSON.stringify(await config, undefined, 4));
 })();
 export default config;

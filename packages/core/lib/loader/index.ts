@@ -1,4 +1,4 @@
-import { Loader, LoaderResource } from "pixi.js";
+import { Loader, LoaderResource } from "@anxi/render";
 
 export class AnxiLoader {
   constructor(public proto: Loader = new Loader()) { }

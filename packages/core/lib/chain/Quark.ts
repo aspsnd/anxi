@@ -1,7 +1,7 @@
 import { RelaxController } from "../controller/controller";
 import { AnxiEvent } from "../event/event";
 import { AnxiEventer } from "../event/eventer";
-import type { World } from "./world";
+import type { World } from "./World";
 
 export interface MoveStruct {
   old: number,

@@ -1,8 +1,8 @@
-import { Container } from "pixi.js";
+import { Container } from "@anxi/render";
 import { Quark } from "@anxi/core";
 import { Controller } from "@anxi/core";
 import { WorldViewController } from "./WorldViewer";
-import { RendererViewController } from "@anxi/render";
+import { RendererViewController } from "../index";
 
 export abstract class ViewController extends Controller {
   container = new Container()

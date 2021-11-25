@@ -24,6 +24,7 @@
     "strictNullChecks": true,
     "strict": true,
     "strictFunctionTypes": true,
+    "declarationDir": "./types",
     "lib": [
       "esnext",
       "dom"
