@@ -47,7 +47,7 @@ async function main() {
 		commonjs(),
 		json(),
 		typescript({
-			useTsconfigDeclarationDir: true
+			useTsconfigDeclarationDir: true,
 		}),
 		// string({
 		//     include: [
