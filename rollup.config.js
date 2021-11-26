@@ -272,7 +272,4 @@ async function main() {
 	return results;
 }
 const config = main();
-(async () => {
-	fs.writeFileSync('./config.js', JSON.stringify(await config, undefined, 4));
-})();
 export default config;
