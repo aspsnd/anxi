@@ -1,5 +1,5 @@
 import type { Quark, StateController } from "@anxi/core";
-import { Matrix } from "pixi.js"
+import { Matrix } from "@anxi/render"
 import { standardize } from "./util";
 
 // 可编写为plain json配置文件的格式

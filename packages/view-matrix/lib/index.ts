@@ -1,6 +1,6 @@
 import { Quark, StateController } from "@anxi/core";
-import { ViewController } from "@anxi/render";
-import { Matrix, Sprite } from "pixi.js";
+import { ViewController } from "@anxi/view";
+import { Matrix, Sprite } from "@anxi/render";
 import { getCurrent } from "..";
 import { ActionStruct, StandardActionStruct, ActionData } from "./action";
 

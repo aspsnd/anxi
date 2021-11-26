@@ -1,4 +1,4 @@
-import { Container, Graphics, Sprite, Text, Texture, TilingSprite } from "pixi.js";
+import { Container, Graphics, Sprite, Text, Texture, TilingSprite } from "@anxi/render";
 import { AStyle } from "../pcss/style";
 import { AElement } from "./element";
 

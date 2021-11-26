@@ -1,6 +1,6 @@
 import { Quark } from "@anxi/core";
-import { ViewController } from "@anxi/render";
-import { DisplayObject } from "pixi.js";
+import { ViewController } from "@anxi/view";
+import { DisplayObject } from "@anxi/render";
 
 export class ConstViewer<T extends DisplayObject> extends ViewController {
   onRender(): void {

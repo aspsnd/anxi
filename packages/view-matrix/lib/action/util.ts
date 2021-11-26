@@ -1,6 +1,6 @@
-import { Matrix } from "pixi.js";
+import { Matrix } from "@anxi/render";
 import type { ActionStruct, ActionValue, BaseActionValue, StandardAction, StandardActionStruct, StandardActionValue } from ".";
-import { a2r } from "../../../core";
+import { a2r } from "@anxi/core";
 
 export function standardize(struct: ActionStruct): StandardActionStruct {
   const standard: StandardActionStruct = {};

@@ -13,6 +13,7 @@ const templete = `{
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "bundle": "dist/browser/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "lib",
     "dist",

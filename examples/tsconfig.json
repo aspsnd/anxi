@@ -19,9 +19,6 @@
       "@anxi/core": [
         "./packages/core"
       ],
-      "@anxi/img-packer": [
-        "./packages/img-packer"
-      ],
       "@anxi/loader": [
         "./packages/loader"
       ],
@@ -33,6 +30,9 @@
       ],
       "@anxi/vdom": [
         "./packages/vdom"
+      ],
+      "@anxi/view": [
+        "./packages/view"
       ],
       "@anxi/view-const": [
         "./packages/view-const"

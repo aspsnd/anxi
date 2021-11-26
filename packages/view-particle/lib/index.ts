@@ -1,5 +1,5 @@
 import { Quark } from "@anxi/core";
-import { ViewController } from "@anxi/render";
+import { ViewController } from "@anxi/view";
 import { Emitter, EmitterConfigV3 } from "@pixi/particle-emitter";
 
 export interface ParticleViewerOptions extends EmitterConfigV3 {

@@ -1,7 +1,7 @@
-import { ViewController } from "@anxi/render";
+import { ViewController } from "@anxi/view";
 import { Quark, StateController } from "@anxi/core";
 import { Spine } from "pixi-spine";
-import { LoaderResource } from "pixi.js";
+import { LoaderResource } from "@anxi/render";
 
 export class SpineViewer extends ViewController {
 

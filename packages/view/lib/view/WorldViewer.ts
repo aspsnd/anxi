@@ -1,6 +1,6 @@
 import { Controller } from "@anxi/core";
 import type { World } from "@anxi/core";
-import { Container } from "@pixi/display";
+import { Container } from "@anxi/render";
 
 export class WorldViewController extends Controller<World> {
   container = new Container()

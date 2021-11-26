@@ -1,4 +1,4 @@
-import { ITextStyle } from "pixi.js";
+import { ITextStyle } from "@anxi/render";
 import { AElement } from "../core/element";
 
 export class AStyle {

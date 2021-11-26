@@ -1,4 +1,4 @@
-import { Container } from "pixi.js";
+import { Container } from "@anxi/render";
 import { AStyle } from "../pcss/style";
 
 export interface AElement {

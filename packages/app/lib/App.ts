@@ -1,5 +1,5 @@
 import { World } from "@anxi/core";
-import { RendererOptions, RendererViewController } from "@anxi/render";
+import { RendererOptions, RendererViewController } from "@anxi/view";
 import { Ticker } from "./ticker";
 
 export interface AppOptions extends RendererOptions {
