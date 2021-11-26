@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "workspaces": [
-    "bundles/*",
-    "packages/*"
+    "packages/*",
+    "bundles/*"
   ],
   "private": true,
   "scripts": {
