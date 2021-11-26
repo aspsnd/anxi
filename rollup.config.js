@@ -87,7 +87,7 @@ async function main() {
 
 	// Collect the list of packages
 	await workspacesRun({ cwd: __dirname, orderByDeps: true }, async (pkg) => {
-		if (!pkg.config.private && ['@anxi/core', '@anxi/render'].includes(pkg.name)) {
+		if (!pkg.config.private) {
 			packages.push(pkg);
 		}
 	});
