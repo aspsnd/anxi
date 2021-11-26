@@ -1,4 +1,4 @@
-import type { StandardAction } from "../";
+import type { StandardAction } from "./action";
 
 export function getCurrent(action: StandardAction, time: number) {
   let max = action.length;

@@ -1,7 +1,7 @@
 import { Quark, StateController } from "@anxi/core";
 import { ViewController } from "@anxi/view";
 import { Matrix, Sprite } from "@anxi/render";
-import { getCurrent } from "..";
+import { getCurrent } from "./util";
 import { ActionStruct, StandardActionStruct, ActionData } from "./action";
 
 export type MatrixBaseAction = ActionStruct;

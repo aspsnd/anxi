@@ -1,7 +1,6 @@
-import { Controller, World } from "@anxi/core";
+import { Controller, World, AnxiEvent } from "@anxi/core";
 import Matter from "matter-js";
-import { AnxiEvent } from "../../../core/lib/event/event";
-import { PhysicsControllerFlag } from "../atom";
+import { PhysicsControllerFlag } from "../symbol";
 
 
 export interface PhysicsWorldOptions extends Matter.IEngineDefinition {

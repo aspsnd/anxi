@@ -1,5 +1,6 @@
 import { Atom, Controller, MoveStruct } from "@anxi/core";
 import Matter, { Body } from "matter-js";
+import { PhysicsControllerFlag } from "../symbol";
 import { PhysicsWorldController } from "../world";
 
 // export type Option = Matter.IBodyDefinition | Matter.ICompositeDefinition;
@@ -12,8 +13,6 @@ export type PhysicsControllerOptions<T extends boolean = boolean> = T extends tr
   option?: Matter.ICompositeDefinition,
   composite?: Matter.Composite
 };
-export const PhysicsControllerFlag: unique symbol = Symbol();
-export type PhysicsControllerFlag = typeof PhysicsControllerFlag;
 export type PhysicsControllerEventNames = 'collisionStart' | 'collisionActive' | 'collisionEnd';
 export class PhysicsController<T extends boolean> extends Controller<Atom, PhysicsControllerEventNames> {
   box: T extends true ? Matter.Body : Matter.Composite
