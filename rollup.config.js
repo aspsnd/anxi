@@ -9,6 +9,7 @@ import jscc from 'rollup-plugin-jscc';
 import workspacesRun from 'workspaces-run';
 import repo from './lerna.json';
 import fs from 'fs';
+import { writeFile } from "fs/promises";
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -93,7 +94,9 @@ async function main() {
 	});
 
 
-	const namespaces = {};
+	const namespaces = {
+		"pixi.js": "PIXI"
+	};
 
 	// Create a map of globals to use for bundled packages
 	packages.forEach((pkg) => {
@@ -126,7 +129,7 @@ async function main() {
 
 		// Check for bundle folder
 		const external = Object.keys(dependencies || [])
-			.concat(Object.keys(peerDependencies || []));
+			.concat(Object.keys(peerDependencies || [])).concat(['pixi.js']);
 		const basePath = path.relative(__dirname, pkg.dir);
 		let input = path.join(basePath, 'index.ts');
 		const freeze = false;
@@ -272,4 +275,7 @@ async function main() {
 	return results;
 }
 const config = main();
+(async () => {
+	await writeFile('./temp/config.json', JSON.stringify(await config, undefined, 2));
+})()
 export default config;

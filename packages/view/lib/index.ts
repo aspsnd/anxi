@@ -1,5 +1,5 @@
 import { World } from "@anxi/core";
-import { AbstractRenderer, autoDetectRenderer, IRendererOptions } from "@pixi/core";
+import { AbstractRenderer, autoDetectRenderer, IRendererOptions } from "@anxi/render";
 import { WorldViewController } from "./view/WorldViewer";
 
 export interface RendererOptions extends IRendererOptions {
