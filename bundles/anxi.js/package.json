@@ -1,6 +1,6 @@
 {
   "name": "anxi.js",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "AnxiJS",
   "author": "aspsnd <2546697613@qq.com>",
   "standalone": true,
@@ -23,6 +23,5 @@
     "dist/",
     "*.d.ts"
   ],
-  "dependencies": {
-  }
+  "dependencies": {}
 }

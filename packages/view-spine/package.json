@@ -1,6 +1,6 @@
 {
   "name": "@anxi/view-spine",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "> TODO: description",
   "author": "aspsnd <2546697613@qq.com>",
   "homepage": "https://github.com/aspsnd/anxi#readme",
@@ -30,8 +30,8 @@
     "pixi-spine": "^3.0.13"
   },
   "peerDependencies": {
-    "@anxi/core": "1.0.0",
-    "@anxi/view": "1.0.0",
-    "@anxi/render": "1.0.0"
+    "@anxi/core": "0.0.1",
+    "@anxi/view": "0.0.1",
+    "@anxi/render": "0.0.1"
   }
 }

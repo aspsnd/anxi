@@ -1,6 +1,6 @@
 {
   "name": "@anxi/loader",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "> TODO: description",
   "author": "aspsnd <2546697613@qq.com>",
   "homepage": "https://github.com/aspsnd/anxi#readme",
@@ -23,7 +23,5 @@
   "bugs": {
     "url": "https://github.com/aspsnd/anxi/issues"
   },
-  "dependencies": {
-    
-  }
+  "dependencies": {}
 }

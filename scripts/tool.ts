@@ -29,7 +29,7 @@ export function updateDependences(pkg: Record<string, any>, depType: string, ver
   const deps = pkg[depType];
   if (!deps) return;
   Object.keys(deps).forEach(dep => {
-    if (dep.startsWith('@eva/') && packages.indexOf(dep.substring(5)) > -1) {
+    if (dep.startsWith('@anxi/') && packages.some(name => `@anxi/${name}` === dep)) {
       console.log(yellow(`${pkg.name} -> ${depType} -> ${dep}@${version}`));
       deps[dep] = `${version}`;
     }
