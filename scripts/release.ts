@@ -23,9 +23,9 @@ const skipBuild = args.sb ?? args.skipBuild;
 
 const versionIncrements = ['patch', 'minor', 'major', ...(preId ? ['prepatch', 'preminor', 'premajor', 'prerelease'] : [])];
 
-const inc = i => semver.inc(currentVersion, i, preId);
-const run = (bin, args, opts = {}) => execa(bin, args, { stdio: 'inherit', ...opts });
-const step = msg => console.log(chalk.cyan(msg));
+const inc = (i: semver.ReleaseType) => semver.inc(currentVersion, i, preId);
+const run = (bin: string, args: string[], opts = {}) => execa(bin, args, { stdio: 'inherit', ...opts });
+const step = (msg: string) => console.log(chalk.cyan(msg));
 
 async function release() {
   // no explicit version, offer suggestions
@@ -33,14 +33,14 @@ async function release() {
     type: 'select',
     name: 'release',
     message: 'Select release type',
-    choices: versionIncrements.map(i => `${i} (${inc(i)})`).concat(['custom']),
+    choices: versionIncrements.map(i => `${i} (${inc(i as semver.ReleaseType)})`).concat(['custom']),
   });
   const targetVersion = release === 'custom' ? (await prompt<{ version: string }>({
     type: 'input',
     name: 'version',
     message: 'Input custom version',
     initial: currentVersion,
-  })).version : release.match(/\((.*)\)/)[1];
+  })).version : release.match(/\((.*)\)/)![1];
 
   if (!semver.valid(targetVersion)) {
     throw new Error(`invalid target version: ${targetVersion}`);
@@ -80,7 +80,7 @@ async function release() {
   // publish packages
   step('\nPublishing packages...');
   for (const pkg of packages) {
-    await publishPackage(pkg, targetVersion, run);
+    await publishPackage(pkg, targetVersion);
   }
 
   // push to GitHub
@@ -93,7 +93,7 @@ async function release() {
 }
 
 
-async function publishPackage(pkgName, version, runIfNotDry) {
+async function publishPackage(pkgName: string, version: string) {
 
   const pkgRoot = getPkgRoot(pkgName);
   const pkgPath = path.resolve(pkgRoot, 'package.json');
@@ -102,17 +102,16 @@ async function publishPackage(pkgName, version, runIfNotDry) {
     return;
   }
 
-  const preReleaseTag = semver.prerelease(version);
-  const releaseTag = preReleaseTag ? preReleaseTag[0] : null;
+  const releaseTag = semver.prerelease(version)?.[0] as string;
 
   step(`Publishing ${pkgName}...`);
   try {
-    await runIfNotDry('npm', ['publish', ...(releaseTag ? ['--tag', releaseTag] : []), '--access', 'public'], {
+    await run('npm', ['publish', ...(releaseTag ? ['--tag', releaseTag] : []), '--access', 'public'], {
       cwd: pkgRoot,
       stdio: 'pipe',
     });
     console.log(chalk.green(`Successfully published ${pkgName}@${version}`));
-  } catch (e) {
+  } catch (e: any) {
     if (e.stderr.match(/previously published/)) {
       console.log(chalk.red(`Skipping already published: ${pkgName}`));
     } else {

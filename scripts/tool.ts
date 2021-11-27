@@ -3,7 +3,7 @@ import { resolve } from "path";
 import { yellow } from "chalk";
 
 export const packages = readdirSync('./packages').filter(p => !p.endsWith('.ts') && !p.startsWith('.'));
-export const getPkgRoot = pkg => resolve(__dirname, '../packages/' + pkg);
+export const getPkgRoot = (pkg: string) => resolve(__dirname, '../packages/' + pkg);
 
 export function updateVersions(version: string) {
   // 1. update root package.json
@@ -11,9 +11,12 @@ export function updateVersions(version: string) {
 
   // 2. update all packages
   packages.forEach(p => updatePackage(getPkgRoot(p), version));
+
+  // 3. update bundle anxi.js
+  updatePackage(resolve(__dirname, '../bundles/anxi.js'), version);
 }
 
-export function updatePackage(pkgRoot, version) {
+export function updatePackage(pkgRoot: string, version: string) {
   const pkgPath = resolve(pkgRoot, 'package.json');
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
   pkg.version = version;
@@ -22,7 +25,7 @@ export function updatePackage(pkgRoot, version) {
   writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
 }
 
-export function updateDependences(pkg, depType, version) {
+export function updateDependences(pkg: Record<string, any>, depType: string, version: string) {
   const deps = pkg[depType];
   if (!deps) return;
   Object.keys(deps).forEach(dep => {
