@@ -2,10 +2,15 @@
   "npmClient": "npm",
   "registry": "https://registry.npmjs.org/",
   "useWorkspaces": true,
+  "version": "independent",
   "bootstrap": {
     "hoist": true,
-    "npmClientArgs": ["--no-shrinkwrap"]
+    "npmClientArgs": [
+      "--no-shrinkwrap"
+    ]
   },
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "loglevel": "verbose"
 }

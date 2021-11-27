@@ -20,7 +20,6 @@
     "clean:dist": "rimraf dist/*",
     "clean:modules": "lerna clean --yes",
     "clean": "run-s clean:*",
-    "prebuild": "run-s clean:*",
     "build": "ts-node ./scripts/build.ts && run-s clean:types",
     "release": "ts-node ./scripts/release.ts",
     "ver": "ts-node ./scripts/version.ts"
