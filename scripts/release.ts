@@ -11,7 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 import semver from "semver";
-const currentVersion = '0.0.0-alpha.0';
+import { version as currentVersion } from "../package.json";
 import { prompt } from "enquirer";
 import { updateVersions } from "./tool";
 import { packages, getPkgRoot } from "./tool";
