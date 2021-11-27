@@ -29,6 +29,6 @@
   "peerDependencies": {
     "@anxi/core": "1.0.0",
     "@anxi/render": "1.0.0",
-    "@anxi/view": "0.0.0"
+    "@anxi/view": "1.0.0"
   }
 }

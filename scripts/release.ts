@@ -10,61 +10,43 @@ const args = require('minimist')(process.argv.slice(2));
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
-const semver = require('semver');
-const currentVersion = require('../package.json').version;
-const {prompt} = require('enquirer');
+import semver from "semver";
+const currentVersion = '0.0.0-alpha.0';
+import { prompt } from "enquirer";
+import { updateVersions } from "./tool";
+import { packages, getPkgRoot } from "./tool";
 const execa = require('execa');
 
-const preId = args.preid || (semver.prerelease(currentVersion) && semver.prerelease(currentVersion)[0]);
-const isDryRun = args.dry;
-const skipTests = args.skipTests;
-const skipBuild = args.skipBuild;
+const preId = args.preid ?? semver.prerelease(currentVersion)?.[0];
+const skipBuild = args.sb ?? args.skipBuild;
 
-const packages = fs.readdirSync(path.resolve(__dirname, '../packages')).filter(p => !p.endsWith('.ts') && !p.startsWith('.'));
-
-const skippedPackages = ['plugin-renderer-test'];
 
 const versionIncrements = ['patch', 'minor', 'major', ...(preId ? ['prepatch', 'preminor', 'premajor', 'prerelease'] : [])];
 
 const inc = i => semver.inc(currentVersion, i, preId);
-const bin = name => path.resolve(__dirname, '../node_modules/.bin/' + name);
-const run = (bin, args, opts = {}) => execa(bin, args, {stdio: 'inherit', ...opts});
-const dryRun = (bin, args, opts = {}) => console.log(chalk.blue(`[dryrun] ${bin} ${args.join(' ')}`), opts);
-const runIfNotDry = isDryRun ? dryRun : run;
-const getPkgRoot = pkg => path.resolve(__dirname, '../packages/' + pkg);
+const run = (bin, args, opts = {}) => execa(bin, args, { stdio: 'inherit', ...opts });
 const step = msg => console.log(chalk.cyan(msg));
 
-async function main() {
-  let targetVersion = args._[0];
-
-  if (!targetVersion) {
-    // no explicit version, offer suggestions
-    const {release} = await prompt({
-      type: 'select',
-      name: 'release',
-      message: 'Select release type',
-      choices: versionIncrements.map(i => `${i} (${inc(i)})`).concat(['custom']),
-    });
-
-    if (release === 'custom') {
-      targetVersion = (
-        await prompt({
-          type: 'input',
-          name: 'version',
-          message: 'Input custom version',
-          initial: currentVersion,
-        })
-      ).version;
-    } else {
-      targetVersion = release.match(/\((.*)\)/)[1];
-    }
-  }
+async function release() {
+  // no explicit version, offer suggestions
+  const { release } = await prompt<{ release: string }>({
+    type: 'select',
+    name: 'release',
+    message: 'Select release type',
+    choices: versionIncrements.map(i => `${i} (${inc(i)})`).concat(['custom']),
+  });
+  const targetVersion = release === 'custom' ? (await prompt<{ version: string }>({
+    type: 'input',
+    name: 'version',
+    message: 'Input custom version',
+    initial: currentVersion,
+  })).version : release.match(/\((.*)\)/)[1];
 
   if (!semver.valid(targetVersion)) {
     throw new Error(`invalid target version: ${targetVersion}`);
   }
 
-  const {yes} = await prompt({
+  const { yes } = await prompt<{ yes: string }>({
     type: 'confirm',
     name: 'yes',
     message: `Releasing v${targetVersion}. Confirm?`,
@@ -74,32 +56,23 @@ async function main() {
     return;
   }
 
-  // run tests before release
-  step('\nRunning tests...');
-  if (!skipTests && !isDryRun) {
-    await run(bin('jest'), ['--clearCache']);
-    await run('npm', ['test']);
-  } else {
-    console.log('(skipped)');
-  }
-
   // update all package versions and inter-dependencies
   step('\nUpdating cross dependencies...');
   updateVersions(targetVersion);
 
   // build all packages with types
   step('\nBuilding all packages...');
-  if (!skipBuild && !isDryRun) {
-    await run('npm', ['run', 'build', '--', '--release', '-f', 'cjs-esm-iife']);
+  if (!skipBuild) {
+    await run('npm', ['run', 'build']);
   } else {
     console.log('(skipped)');
   }
 
-  const {stdout} = await run('git', ['diff'], {stdio: 'pipe'});
+  const { stdout } = await run('git', ['diff'], { stdio: 'pipe' });
   if (stdout) {
     step('\nCommitting changes...');
-    await runIfNotDry('git', ['add', '-A']);
-    await runIfNotDry('git', ['commit', '-m', `release: v${targetVersion}`]);
+    await run('git', ['add', '-A']);
+    await run('git', ['commit', '-m', `release: v${targetVersion}`]);
   } else {
     console.log('No changes to commit.');
   }
@@ -107,57 +80,21 @@ async function main() {
   // publish packages
   step('\nPublishing packages...');
   for (const pkg of packages) {
-    await publishPackage(pkg, targetVersion, runIfNotDry);
+    await publishPackage(pkg, targetVersion, run);
   }
 
   // push to GitHub
   step('\nPushing to GitHub...');
-  await runIfNotDry('git', ['tag', `v${targetVersion}`]);
-  await runIfNotDry('git', ['push', 'origin', `refs/tags/v${targetVersion}`]);
-  await runIfNotDry('git', ['push']);
+  await run('git', ['tag', `v${targetVersion}`]);
+  await run('git', ['push', 'origin', `refs/tags/v${targetVersion}`]);
+  await run('git', ['push']);
 
-  if (isDryRun) {
-    console.log('\nDry run finished - run git diff to see package changes.');
-  }
-
-  if (skippedPackages.length) {
-    console.log(chalk.yellow(`The following packages are skipped and NOT published:\n- ${skippedPackages.join('\n- ')}`));
-  }
   console.log();
 }
 
-function updateVersions(version) {
-  // 1. update root package.json
-  updatePackage(path.resolve(__dirname, '..'), version);
-
-  // 2. update all packages
-  packages.forEach(p => updatePackage(getPkgRoot(p), version));
-}
-
-function updatePackage(pkgRoot, version) {
-  const pkgPath = path.resolve(pkgRoot, 'package.json');
-  const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
-  pkg.version = version;
-  updateDeps(pkg, 'dependencies', version);
-  updateDeps(pkg, 'peerDependencies', version);
-  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
-}
-
-function updateDeps(pkg, depType, version) {
-  const deps = pkg[depType];
-  if (!deps) return;
-  Object.keys(deps).forEach(dep => {
-    if (dep.startsWith('@eva/') && packages.indexOf(dep.substring(5)) > -1) {
-      console.log(chalk.yellow(`${pkg.name} -> ${depType} -> ${dep}@${version}`));
-      deps[dep] = `${version}`;
-    }
-  });
-}
 
 async function publishPackage(pkgName, version, runIfNotDry) {
-  if (skippedPackages.includes(pkgName)) {
-    return;
-  }
+
   const pkgRoot = getPkgRoot(pkgName);
   const pkgPath = path.resolve(pkgRoot, 'package.json');
   const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
@@ -184,6 +121,4 @@ async function publishPackage(pkgName, version, runIfNotDry) {
   }
 }
 
-main().catch(err => {
-  console.error(err);
-});
+release()

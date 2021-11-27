@@ -275,7 +275,7 @@ async function main() {
 	return results;
 }
 const config = main();
-(async () => {
-	await writeFile('./temp/config.json', JSON.stringify(await config, undefined, 2));
-})()
+// (async () => {
+// 	await writeFile('./temp/config.json', JSON.stringify(await config, undefined, 2));
+// })()
 export default config;
