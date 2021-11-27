@@ -18,6 +18,9 @@
     "type": "git",
     "url": "git+https://github.com/aspsnd/anxi.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "lib/",
     "dist/",

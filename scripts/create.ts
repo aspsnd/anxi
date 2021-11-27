@@ -29,6 +29,9 @@ const templete = `{
   "bugs": {
     "url": "https://github.com/aspsnd/anxi/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     
   }
