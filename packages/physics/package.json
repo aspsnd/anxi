@@ -29,9 +29,6 @@
   "bugs": {
     "url": "https://github.com/aspsnd/anxi/issues"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
     "matter-js": "0.17.1"
   },

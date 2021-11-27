@@ -29,9 +29,6 @@
   "bugs": {
     "url": "https://github.com/aspsnd/anxi/issues"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "peerDependencies": {
     "@anxi/core": "0.0.1",
     "@anxi/render": "0.0.1"

@@ -89,6 +89,9 @@
     "rollup.config.js"
   ],
   "ts-node": {
-    "transpileOnly": true
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   }
 }
