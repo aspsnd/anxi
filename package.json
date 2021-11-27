@@ -11,10 +11,10 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "cd ./examples && vite",
-    "tex": "ts-node ./script/texTransfor.ts -P ./script/tsconfig.json",
+    "tex": "ts-node ./scripts/texTransfor.ts",
     "prestart": "npm run tsconf",
     "tsconf": "node ./reconf.js",
-    "create": "ts-node ./script/create.ts -P ./script/tsconfig.json",
+    "create": "ts-node ./scripts/create.ts",
     "clean:build": "rimraf \"{bundles,packages}/*/dist\"",
     "clean:types": "rimraf types",
     "clean:dist": "rimraf dist/*",
@@ -22,9 +22,10 @@
     "clean": "run-s clean:*",
     "prebuild": "run-s clean:*",
     "build": "ts-node ./scripts/build.ts && run-s clean:types",
-    "release": "ts-node ./scripts/release.ts"
+    "release": "ts-node ./scripts/release.ts",
+    "ver": "ts-node ./scripts/version.ts"
   },
-  "author": "Anxyser",
+  "author": "aspsnd <2546697613@qq.com>",
   "license": "MIT",
   "devDependencies": {
     "@microsoft/api-extractor": "^7.18.19",

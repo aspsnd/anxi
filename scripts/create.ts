@@ -7,7 +7,7 @@ const templete = `{
   "name": "@anxi/{{pkg}}",
   "version": "1.0.0",
   "description"A package of anxi.js",
-  "author": "anxyser <2546697613@qq.com>",
+  "author": "aspsnd <2546697613@qq.com>",
   "homepage": "https://github.com/aspsnd/anxi#readme",
   "license": "MIT",
   "main": "dist/cjs/index.js",
