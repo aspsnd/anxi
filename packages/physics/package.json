@@ -1,6 +1,6 @@
 {
   "name": "@anxi/physics",
-  "version": "0.0.2-alpha.0",
+  "version": "0.0.2-alpha.1",
   "description": "> TODO: description",
   "author": "aspsnd <2546697613@qq.com>",
   "homepage": "https://github.com/aspsnd/anxi#readme",
@@ -33,6 +33,6 @@
     "matter-js": "0.17.1"
   },
   "peerDependencies": {
-    "@anxi/core": "0.0.2-alpha.0"
+    "@anxi/core": "0.0.2-alpha.1"
   }
 }
