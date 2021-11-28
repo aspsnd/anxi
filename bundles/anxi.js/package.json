@@ -22,9 +22,7 @@
     "access": "public"
   },
   "files": [
-    "lib/",
-    "dist/",
-    "*.d.ts"
+    "dist/"
   ],
   "dependencies": {}
 }
