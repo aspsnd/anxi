@@ -8,6 +8,7 @@
   "module": "dist/esm/index.js",
   "bundle": "dist/browser/index.js",
   "bundleModule": "dist/browser/index.mjs",
+  "types": "dist/index.d.ts",
   "bundleOutput": {
     "name": "ANXI"
   },

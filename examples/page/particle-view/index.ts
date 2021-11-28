@@ -1,6 +1,6 @@
 import { App } from "@anxi/app";
 import { Atom } from "@anxi/core"
-import { RendererViewController } from "@anxi/render";
+import { RendererViewController } from "@anxi/view";
 import { ParticleViewer } from "@anxi/view-particle";
 import type { InteractionEvent } from "@pixi/interaction";
 
