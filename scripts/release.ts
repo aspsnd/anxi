@@ -15,6 +15,7 @@ import { version as currentVersion } from "../package.json";
 import { prompt } from "enquirer";
 import { updateVersions } from "./tool";
 import { packages, getPkgRoot } from "./tool";
+import { resolve } from "path/posix";
 const execa = require('execa');
 
 const preId = args.preid ?? semver.prerelease(currentVersion)?.[0];
@@ -83,6 +84,8 @@ async function release() {
     await publishPackage(pkg, targetVersion);
   }
 
+  publishBundlePackage(targetVersion);
+
   // push to GitHub
   step('\nPushing to GitHub...');
   await run('git', ['tag', `v${targetVersion}`]);
@@ -92,7 +95,32 @@ async function release() {
   console.log();
 }
 
+async function publishBundlePackage(version: string) {
 
+  const pkgRoot = resolve(__dirname, '../bundles/anxi.js');
+  const pkgPath = path.resolve(pkgRoot, 'package.json');
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+  if (pkg.private) {
+    return;
+  }
+
+  const releaseTag = semver.prerelease(version)?.[0] as string;
+
+  step(`Publishing anxi.js...`);
+  try {
+    await run('npm', ['publish', ...(releaseTag ? ['--tag', releaseTag] : []), '--access', 'public'], {
+      cwd: pkgRoot,
+      stdio: 'pipe',
+    });
+    console.log(chalk.green(`Successfully published anxi.js@${version}`));
+  } catch (e: any) {
+    if (e.stderr.match(/previously published/)) {
+      console.log(chalk.red(`Skipping already published: anxi.js`));
+    } else {
+      throw e;
+    }
+  }
+}
 async function publishPackage(pkgName: string, version: string) {
 
   const pkgRoot = getPkgRoot(pkgName);
