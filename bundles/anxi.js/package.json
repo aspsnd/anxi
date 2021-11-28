@@ -24,5 +24,17 @@
   "files": [
     "dist/"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "@anxi/core": "0.0.1",
+    "@anxi/app": "0.0.1",
+    "@anxi/render": "0.0.1",
+    "@anxi/view": "0.0.1",
+    "@anxi/loader": "0.0.1",
+    "@anxi/physics": "0.0.1",
+    "@anxi/vdom": "0.0.1",
+    "@anxi/view-const": "0.0.1",
+    "@anxi/view-spine": "0.0.1",
+    "@anxi/view-matrix": "0.0.1",
+    "@anxi/view-particle": "0.0.1"
+  }
 }

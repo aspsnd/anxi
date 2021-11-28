@@ -16,4 +16,3 @@ export * from "./lib/util/math";
 export * from "./lib/event/eventer";
 export * from "./lib/event/event";
 export * from "./lib/event/timer";
-export const App = {};

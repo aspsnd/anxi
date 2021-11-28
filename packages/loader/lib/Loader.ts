@@ -1,3 +1,3 @@
-export class AnxiLoader {
+export class Loader {
 
 }
