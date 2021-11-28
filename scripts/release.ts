@@ -84,7 +84,7 @@ async function release() {
     await publishPackage(pkg, targetVersion);
   }
 
-  publishBundlePackage(targetVersion);
+  await publishBundlePackage(targetVersion);
 
   // push to GitHub
   step('\nPushing to GitHub...');
