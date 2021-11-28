@@ -3,9 +3,10 @@ import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "fs";
 import { red, green } from "chalk";
 import minimist from "minimist";
 
+import { version } from "../package.json";
 const templete = `{
   "name": "@anxi/{{pkg}}",
-  "version": "1.0.0",
+  "version": "${version}",
   "description"A package of anxi.js",
   "author": "aspsnd <2546697613@qq.com>",
   "homepage": "https://github.com/aspsnd/anxi#readme",
@@ -15,9 +16,7 @@ const templete = `{
   "bundle": "dist/browser/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "lib",
-    "dist",
-    "*.d.ts"
+    "dist"
   ],
   "repository": {
     "type": "git",

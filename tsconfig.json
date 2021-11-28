@@ -35,43 +35,43 @@
     ],
     "paths": {
       "@anxi/app": [
-        "./packages/app"
+        "./packages/app/index.ts"
       ],
       "@anxi/core": [
-        "./packages/core"
+        "./packages/core/index.ts"
       ],
       "@anxi/loader": [
-        "./packages/loader"
+        "./packages/loader/index.ts"
       ],
       "@anxi/physics": [
-        "./packages/physics"
+        "./packages/physics/index.ts"
       ],
       "@anxi/render": [
-        "./packages/render"
+        "./packages/render/index.ts"
       ],
       "@anxi/vdom": [
-        "./packages/vdom"
+        "./packages/vdom/index.ts"
       ],
       "@anxi/view": [
-        "./packages/view"
+        "./packages/view/index.ts"
       ],
       "@anxi/view-const": [
-        "./packages/view-const"
+        "./packages/view-const/index.ts"
       ],
       "@anxi/view-matrix": [
-        "./packages/view-matrix"
+        "./packages/view-matrix/index.ts"
       ],
       "@anxi/view-particle": [
-        "./packages/view-particle"
+        "./packages/view-particle/index.ts"
       ],
       "@anxi/view-spine": [
-        "./packages/view-spine"
+        "./packages/view-spine/index.ts"
       ],
       "@anxi/*": [
-        "./packages/*"
+        "./packages/*/index.ts"
       ],
       "anxi.js": [
-        "./bundles/anxi.js"
+        "./bundles/anxi.js/index.ts"
       ]
     }
   },
@@ -86,7 +86,8 @@
     "**/script/**",
     "**/types/**",
     "bundles/**/*.d.ts",
-    "rollup.config.js"
+    "rollup.config.js",
+    "package/*/dist/index.d.ts"
   ],
   "ts-node": {
     "transpileOnly": true,

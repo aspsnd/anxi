@@ -13,7 +13,7 @@
     "dev": "cd ./examples && vite",
     "tex": "ts-node ./scripts/texTransfor.ts",
     "prestart": "npm run tsconf",
-    "tsconf": "node ./reconf.js",
+    "tsconf": "ts-node ./scripts/reconf.ts",
     "create": "ts-node ./scripts/create.ts",
     "clean:build": "rimraf \"{bundles,packages}/*/dist\"",
     "clean:types": "rimraf types",

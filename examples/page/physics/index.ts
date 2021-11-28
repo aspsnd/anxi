@@ -5,7 +5,7 @@ import { Graphics } from "pixi.js"
 import { PhysicsController, PhysicsWorldController, Matter } from "@anxi/physics";
 import { GameHeight, GameWidth } from "./src/global/config";
 import { App } from "@anxi/app";
-import { RendererViewController } from "@anxi/render";
+import { RendererViewController } from "@anxi/view";
 
 export default async () => {
   const app = new App({

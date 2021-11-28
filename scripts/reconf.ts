@@ -10,11 +10,11 @@ const packages = readdirSync('./packages').filter(path => {
 const paths = {};
 packages.forEach(pkg => {
   paths[`@anxi/${pkg}`] = [
-    `./packages/${pkg}`
+    `./packages/${pkg}/index.ts`
   ]
 });
-paths['@anxi/*'] = ['./packages/*'];
-paths['anxi.js'] = ['./bundles/anxi.js'];
+paths['@anxi/*'] = ['./packages/*/index.ts'];
+paths['anxi.js'] = ['./bundles/anxi.js/index.ts'];
 
 // reconfig root dir tsconfig
 const tsconfig = JSON.parse(readFileSync('./tsconfig.json', 'utf8'));

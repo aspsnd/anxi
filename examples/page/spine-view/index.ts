@@ -2,7 +2,7 @@ import { SpineViewer } from "@anxi/view-spine";
 import { Atom, AnxiLoader } from "@anxi/core";
 import { Text } from "pixi.js";
 import { App } from "@anxi/app";
-import { RendererViewController } from "@anxi/render";
+import { RendererViewController } from "@anxi/view";
 export default async function () {
   let app = new App({
     view: appCanvas,

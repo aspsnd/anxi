@@ -1,6 +1,6 @@
 import { App } from "@anxi/app";
 import { Matter } from "@anxi/physics";
-import { RendererViewController } from "@anxi/render";
+import { RendererViewController } from "@anxi/view";
 import { GameHeight, GameWidth } from "./config";
 import { SingleGame } from "./game";
 import { Plane } from "./game/plane";
