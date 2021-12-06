@@ -47,10 +47,7 @@
         "./packages/view-spine/index.ts"
       ],
       "@anxi/*": [
-        "./packages/*"
-      ],
-      "anxi.js": [
-        "./bundles/anxi.js"
+        "./packages/*/index.ts"
       ]
     }
   },
@@ -59,6 +56,7 @@
     "../packages/**/*"
   ],
   "exclude": [
-    "../packages/*/dist/index.d.ts"
+    "../packages/*/dist/index.d.ts",
+    "../bundles"
   ]
 }

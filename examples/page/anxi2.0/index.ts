@@ -11,8 +11,8 @@ export default async () => {
     height: 1334,
     backgroundColor: 0,
     backgroundAlpha: 1,
-    logicalFPS:60,
-    renderFPS:60
+    logicalFPS: 60,
+    renderFPS: 60
   });
   const { world } = app;
   const quark = new Quark();

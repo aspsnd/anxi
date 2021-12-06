@@ -69,9 +69,6 @@
       ],
       "@anxi/*": [
         "./packages/*/index.ts"
-      ],
-      "anxi.js": [
-        "./bundles/anxi.js/index.ts"
       ]
     }
   },
@@ -79,15 +76,15 @@
     "packages/global.d.ts",
     "packages/*/global.d.ts",
     "packages/**/*.ts",
-    "packages/*/index.ts",
-    "bundles/anxi.js/index.ts"
+    "packages/*/index.ts"
   ],
   "exclude": [
     "**/script/**",
     "**/types/**",
-    "bundles/**/*.d.ts",
+    "bundles",
     "rollup.config.js",
-    "package/*/dist/index.d.ts"
+    "packages/*/dist/index.d.ts",
+    "packages/*/dist/global.d.ts"
   ],
   "ts-node": {
     "transpileOnly": true,

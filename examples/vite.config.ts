@@ -8,7 +8,7 @@ paths.forEach(path => {
   if (statSync(resolve('../packages', path)).isDirectory()) {
     alias.push({
       find: `@anxi/${path}`,
-      replacement: resolve(__dirname, `../packages/${path}`)
+      replacement: resolve(__dirname, `../packages/${path}/index.ts`)
     })
   }
 });

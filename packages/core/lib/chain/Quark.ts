@@ -11,7 +11,7 @@ export interface MoveStruct {
  * 最小的游戏描述对象
  * 具有时间速度，位移拦截，父子关系等概念
  */
-export class Quark extends AnxiEventer<GlobalMixins.WholeQuarkEvents> {
+export class Quark extends AnxiEventer<GlobalAnxiMixins.WholeQuarkEvents> {
 
 
   shadow<T extends RelaxController, K extends Exclude<keyof T['data'], symbol>>(constructor: new (...args: any[]) => T, method: `${'get' | 'lose'}${K}`, cb: (v: T['data'][K]) => void) {

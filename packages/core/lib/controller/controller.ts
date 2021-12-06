@@ -3,7 +3,7 @@ import { AnxiEventer, BEN } from "../event/eventer";
 
 
 export interface RelaxController<D extends {} = {}> {
-  eventer: AnxiEventer<GlobalMixins.WholeQuarkEvents>
+  eventer: AnxiEventer<GlobalAnxiMixins.WholeQuarkEvents>
   data: ControllerData<D>
   signal: ControllerDataSignal<D>
   belonger?: Quark
@@ -44,7 +44,7 @@ export class Controller<D extends Record<string, any> = {}, EN extends BEN = BEN
   private _data_: ControllerData<D> = {} as ControllerData<D>
   data: ControllerData<D> = {} as ControllerData<D>
   signal!: ControllerDataSignal<D>
-  eventer = new AnxiEventer<GlobalMixins.WholeQuarkEvents>()
+  eventer = new AnxiEventer<GlobalAnxiMixins.WholeQuarkEvents>()
   belonger: Quark
   name: string
   constructor(belonger: Quark, lateInit = false) {

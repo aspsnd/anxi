@@ -14,7 +14,7 @@ packages.forEach(pkg => {
   ]
 });
 paths['@anxi/*'] = ['./packages/*/index.ts'];
-paths['anxi.js'] = ['./bundles/anxi.js/index.ts'];
+// paths['anxi.js'] = ['./bundles/anxi.js/index.ts'];
 
 // reconfig root dir tsconfig
 const tsconfig = JSON.parse(readFileSync('./tsconfig.json', 'utf8'));

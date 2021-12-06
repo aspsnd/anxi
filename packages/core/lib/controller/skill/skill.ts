@@ -40,7 +40,7 @@ export class Skill<D extends Partial<{ [key: string]: any }> = {}, T extends {} 
   remove() {
     this.removed = true;
     for (const listener of this.listeners) {
-      this.quark.removeListener(listener as AnxiListener<GlobalMixins.WholeQuarkEvents>);
+      this.quark.removeListener(listener as AnxiListener<GlobalAnxiMixins.WholeQuarkEvents>);
     }
   }
 

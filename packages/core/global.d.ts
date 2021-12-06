@@ -4,8 +4,8 @@ type QuarkEvents = 'time' | `time_${number}`
   | 'destroy' | 'movex' | 'movey' | 'changey' | 'changex'
   | 'getquark' | 'losequark'
 
-declare namespace GlobalMixins {
-  type WholeQuarkEvents = GlobalMixins.QuarkEventsHelper[keyof GlobalMixins.QuarkEventsHelper]
+declare namespace GlobalAnxiMixins {
+  type WholeQuarkEvents = GlobalAnxiMixins.QuarkEventsHelper[keyof GlobalAnxiMixins.QuarkEventsHelper]
 
   interface QuarkEventsHelper {
     constructor: QuarkEvents
