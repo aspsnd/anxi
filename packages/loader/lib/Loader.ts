@@ -1,6 +1,6 @@
-import { AnxiEventer } from "@anxi/core";
+import { AnxiEvent, AnxiEventer } from "@anxi/core";
 import { NetFileLoadType } from "./const";
-import { Resource, ResourceOptions } from "./Resource";
+import { Resource, ResourceOptions, ResourceEvent } from "./Resource";
 import { nextQueues } from "./tool/AsyncQueue";
 import { getExtension } from "./tool/extension";
 import { LoaderMiddleware, LoaderPlugin } from "./type";
@@ -11,10 +11,12 @@ export interface LoaderAddFunction extends GlobalAnxiMixins.LoaderAddFunctions {
   (options: ResourceOptions): Loader
   (resources: (string | ResourceOptions)[]): Loader
 }
+
+export type LoaderEvents = 'progress';
 /**
  * 加载器，可以加载多个资源
  */
-export class Loader extends AnxiEventer {
+export class Loader extends AnxiEventer<LoaderEvents> {
 
   private static plugins: LoaderPlugin[] = []
 
@@ -25,6 +27,15 @@ export class Loader extends AnxiEventer {
     }
     return this;
   }
+
+  /**
+   * 不是精确值
+   */
+  get progress() {
+    return this.currentWeights && this.currentWeights / this.wholeWeights;
+  }
+  wholeWeights = 0
+  currentWeights = 0
 
   static loaders: Loader[] = []
 
@@ -140,7 +151,17 @@ export class Loader extends AnxiEventer {
   }
 
   public addResource(resource: Resource) {
+    if (this.resources.has(resource.options.name)) throw new Error(`There is already a resource named ${resource.options.name}`);
     this.resources.set(resource.options.name, resource);
+    const weight = resource.options.weight || 1;
+    this.wholeWeights += weight;
+    resource.on(ResourceEvent.progress, e => {
+      this.currentWeights += e.data[0] / weight;
+      this.emit(new AnxiEvent('progress'));
+    });
+    resource.once(ResourceEvent.finish, () => {
+      resource.removeListenerByName(ResourceEvent.progress);
+    })
   }
 
   private extensions = new Map<string, NetFileLoadType>();

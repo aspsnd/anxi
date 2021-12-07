@@ -7,6 +7,7 @@ export interface NetFileOptions<T extends NetFileLoadType = NetFileLoadType> {
   crossOrigin: boolean | string
   timeout: number
   loadType: T
+  weight: number
 }
 export type SimpleNetFileOptions<T extends NetFileLoadType = NetFileLoadType> = Partial<NetFileOptions<T>>;
 
@@ -14,7 +15,7 @@ const enum NetFileEvent {
   start = 'start',
   load = 'load',
   error = 'error',
-  finish = 'finish'
+  finish = 'finish',
 }
 /**
  * 单次的网络请求
@@ -27,6 +28,7 @@ export class NetFile<T extends NetFileLoadType = NetFileLoadType> extends AnxiEv
     crossOrigin: false,
     timeout: 0,
     loadType: NetFileLoadType.FetchText,
+    weight: 1
   }
 
   loadingPromise?: Promise<this>

@@ -1,9 +1,9 @@
-import { Loader, Resource, NetFileLoadType } from "@anxi/loader";
+import { Loader, NetFileLoadType } from "@anxi/loader";
 export default async () => {
 
   const loader = new Loader();
-
-  const resource = await loader.loadResource(new Resource({
+  console.log(loader.progress)
+  loader.add({
     name: 'asp',
     files: {
       a: {
@@ -11,6 +11,7 @@ export default async () => {
         loadType: NetFileLoadType.Image
       }
     }
-  }));
-  console.log(resource.datas);
+  });
+  await loader.load();
+  console.log(loader.progress);
 }
